@@ -1,0 +1,229 @@
+/* Importación de fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+:root {
+  /* Colores */
+  --color-turquesa: #40E0D0;
+  --color-blanco: #FFFFFF;
+  --color-gris-oscuro: #333333;
+  --color-gris-claro: #F5F5F5;
+  --color-oro-metalico: #D4AF37;
+  --color-gris-medio: #666666;
+
+  /* Tipografía */
+  --font-family-primary: 'Playfair Display', serif;
+  --font-family-secondary: 'Montserrat', sans-serif;
+
+  /* Tamaños de fuente */
+  --font-size-h1: 48px;
+  --font-size-h2: 36px;
+  --font-size-h3: 24px;
+  --font-size-p: 16px;
+
+  /* Pesos de fuente */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semi-bold: 600;
+  --font-weight-bold: 700;
+}
+
+/* Reset y estilos globales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Asegurar que el body tome el 100% del alto */
+html,
+body,
+#app {
+  height: 100%;
+}
+
+/* Estilos generales del cuerpo */
+body {
+  font-family: var(--font-family-secondary);
+  color: var(--color-gris-oscuro);
+  background-color: var(--color-blanco);
+}
+
+/* Enlaces */
+a {
+  text-decoration: none;
+  color: var(--color-turquesa);
+  font-weight: var(--font-weight-medium);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos globales para botones */
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Botones primarios */
+.button-primary {
+  background-color: var(--color-turquesa);
+  color: var(--color-blanco);
+  font-family: var(--font-family-secondary);
+  font-size: var(--font-size-p);
+  font-weight: var(--font-weight-medium);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.button-primary:hover {
+  background-color: var(--color-oro-metalico);
+}
+
+/* Botones secundarios */
+.button-secondary {
+  background-color: transparent;
+  color: var(--color-turquesa);
+  font-family: var(--font-family-secondary);
+  font-size: var(--font-size-p);
+  font-weight: var(--font-weight-medium);
+  border: 2px solid var(--color-turquesa);
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.button-secondary:hover {
+  color: var(--color-oro-metalico);
+  border-color: var(--color-oro-metalico);
+}
+
+/* Listas */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Títulos y encabezados */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  margin: 0;
+  color: var(--color-gris-oscuro);
+}
+
+h1 {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-bold);
+}
+
+h2 {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-semi-bold);
+}
+
+h3 {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-regular);
+}
+
+/* Párrafos */
+p {
+  font-family: var(--font-family-secondary);
+  font-size: var(--font-size-p);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-gris-oscuro);
+}
+
+/* Formularios y entradas */
+input,
+textarea,
+select {
+  font-family: var(--font-family-secondary);
+  font-size: var(--font-size-p);
+  color: var(--color-gris-oscuro);
+  border: 1px solid var(--color-gris-medio);
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-gris-medio);
+}
+
+label {
+  font-family: var(--font-family-secondary);
+  font-size: 14px;
+  color: var(--color-gris-oscuro);
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Navegación */
+.navbar {
+  background-color: var(--color-blanco);
+  border-bottom: 1px solid var(--color-gris-claro);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.navbar a {
+  color: var(--color-gris-oscuro);
+  padding: 15px 20px;
+  display: inline-block;
+  font-family: var(--font-family-secondary);
+  font-size: var(--font-size-p);
+  font-weight: var(--font-weight-medium);
+}
+
+.navbar a:hover {
+  color: var(--color-turquesa);
+}
+
+/* Contenedor principal */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 80px; /* Espacio para la barra de navegación fija */
+}
+
+/* Iconos */
+.icon {
+  fill: var(--color-gris-oscuro);
+  transition: fill 0.3s ease-in-out;
+}
+
+.icon:hover {
+  fill: var(--color-turquesa);
+}
+
+/* Áreas privadas */
+.private-area {
+  background-color: var(--color-gris-claro);
+  padding: 20px;
+  border-radius: 5px;
+}
+
+/* Accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none;
+  }
+}
