@@ -18,6 +18,7 @@ const formData = reactive({
     name: "",
     price: 0,
     description: "",
+    link: "",
     image: null,
 });
 
@@ -46,6 +47,10 @@ const validateForm = () => {
     }
     if (!formData.description) {
         errorMessage.value = "La descripción es obligatoria.";
+        return false;
+    }
+    if (!formData.link) {
+        errorMessage.value = "El link es obligatorio.";
         return false;
     }
     if (!formData.image) {
@@ -97,6 +102,7 @@ const resetForm = () => {
     formData.name = "";
     formData.price = 0;
     formData.description = "";
+    formData.link = "";
     formData.image = null;
     url.value = null;
 };
@@ -125,6 +131,11 @@ const resetForm = () => {
                 <label for="description">Descripción:</label>
                 <textarea id="description" v-model="formData.description"
                     placeholder="Ej. Descripción del producto..."></textarea>
+            </div>
+            <!-- Url de la joya -->
+            <div class="form-group">
+                <label for="link">Link de instagram:</label>
+                <input type="text" v-model="formData.link" placeholder="Ej. link de Instagram">
             </div>
 
             <!-- Imagen de la joya -->

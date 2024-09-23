@@ -1,43 +1,50 @@
 <template>
     <div v-if="showAnimation" class="overlay">
-        <div class="door left-door">
-            <div class="door-content">
-                <!-- Puedes agregar un logo o texto aquí -->
-                <h1>
-                    <a href="https://www.instagram.com/eskuz_loratu/" target="_blank" aria-label="Instagram">
-                        @ESKUZ_LORATU
-                    </a>
-                </h1>
-            </div>
-        </div>
-        <div class="door right-door">
-            <div class="door-content">
-                <!-- Puedes agregar un logo o texto aquí -->
-                <h1>Ongi Etorri</h1>
-            </div>
+        <!-- Puertas -->
+        <div class="door left-door"></div>
+        <div class="door right-door"></div>
+
+        <!-- Contenido de Texto sobre las puertas -->
+        <div class="text-content">
+            <h1>
+                <a href="https://www.instagram.com/eskuz_loratu/" target="_blank" aria-label="Instagram">
+                    @ESKUZ_LORATU
+                </a>
+            </h1>
+            <h1>Ongi Etorri</h1>
         </div>
     </div>
 </template>
 
-<script>
-export default {
-    name: 'OpeningAnimation',
-    data() {
-        return {
-            showAnimation: true,
-        };
-    },
-    mounted() {
-        // Ocultar la animación después de la duración de la animación CSS
-        const body = document.body;
-        body.style.overflow = 'hidden';
-        setTimeout(() => {
-            this.showAnimation = false;
-            body.style.overflow = 'auto';
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
 
-        }, 3000); // Duración de la animación en milisegundos
-    },
+// Estado reactivo para controlar la visibilidad de la animación
+const showAnimation = ref(true);
+
+// Función para ocultar la animación después de que las animaciones CSS hayan terminado
+const hideAnimation = () => {
+    showAnimation.value = false;
+    document.body.style.overflow = 'auto';
 };
+
+onMounted(() => {
+    // Prevenir el scroll mientras la animación está activa
+    document.body.style.overflow = 'hidden';
+
+    // Establecer un timeout para ocultar la animación después de la duración total
+    // Total tiempo:
+    // 1.5s (puertas abriendo) +
+    // 1s (texto apareciendo) +
+    // 1s (texto visible) +
+    // 1s (texto y overlay desvaneciendo) = 4.5s
+    setTimeout(hideAnimation, 4500); // 4.5 segundos para sincronizar con las animaciones
+});
+
+onUnmounted(() => {
+    // Asegurarse de restaurar el scroll en caso de que el componente se destruya prematuramente
+    document.body.style.overflow = 'auto';
+});
 </script>
 
 <style scoped>
@@ -48,51 +55,93 @@ export default {
     width: 100%;
     height: 100%;
     z-index: 9999;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-.door {
-    width: 100%;
-    height: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    /* Fondo semi-transparente */
-    backdrop-filter: blur(7px);
-    /* Aplica el desenfoque al contenido de fondo */
-    -webkit-backdrop-filter: blur(7px);
-    /* Compatibilidad con Safari */
     display: flex;
     align-items: center;
     justify-content: center;
+    background: #f0f4f8;
     overflow: hidden;
+    /* Animación de entrada y salida del overlay */
+    animation: fadeInOutOverlay 4.5s ease-in-out forwards;
 }
 
+.door {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    background: rgba(232, 248, 246, 0.9);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform-origin: center;
+}
+
+/* Animación para la puerta izquierda (superior) */
 .left-door {
-    animation: openLeftDoor 3.2s forwards;
+    top: 0;
+    left: 0;
+    animation: openLeftDoor 1.5s ease-in-out forwards;
 }
 
+/* Animación para la puerta derecha (inferior) */
 .right-door {
-    animation: openRightDoor 3.2s forwards;
+    bottom: 0;
+    left: 0;
+    animation: openRightDoor 1.5s ease-in-out forwards;
 }
 
-.door-content {
-    font-family: var(--font-family-primary);
-    font-size: 36px;
+/* Contenido de Texto sobre las puertas */
+.text-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    /* Asegura que el texto esté por encima de las puertas */
     text-align: center;
+    opacity: 0;
+    animation: fadeInOutText 4.5s ease-in-out forwards;
+    animation-delay: 1s;
+    /* Inicia después de que las puertas empiezan a abrirse */
+}
 
-    h1,
-    h1 a {
-        color: var(--color-gris-oscuro);
-        font-size: 90%;
+.text-content h1 {
+    font-family: var(--font-family-primary, Arial, sans-serif);
+    color: var(--color-gris-oscuro, #333);
+    margin: 0.5rem 0;
+}
+
+.text-content h1 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.text-content h1 a:hover {
+    text-decoration: underline;
+}
+
+/* Animaciones clave */
+
+/* Fade in y fade out del overlay */
+@keyframes fadeInOutOverlay {
+    0% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
     }
 }
 
+/* Apertura de la puerta izquierda (superior) hacia arriba */
 @keyframes openLeftDoor {
-
-    0%,
-    40% {
+    0% {
         transform: translateY(0%);
     }
 
@@ -101,10 +150,9 @@ export default {
     }
 }
 
+/* Apertura de la puerta derecha (inferior) hacia abajo */
 @keyframes openRightDoor {
-
-    0%,
-    40% {
+    0% {
         transform: translateY(0%);
     }
 
@@ -112,4 +160,29 @@ export default {
         transform: translateY(100%);
     }
 }
+
+/* Fade in y fade out del contenido de texto */
+@keyframes fadeInOutText {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+
+    10% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+    80% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+}
+
+
 </style>

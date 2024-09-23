@@ -21,9 +21,9 @@
 <style scoped>
 /* Header móvil */
 .mobile-header {
-    background-color: var(--color-blanco);
+    background-color: var(--color-fondo);
     padding: 10px 20px;
-    border-bottom: 1px solid var(--color-gris-claro);
+    border-bottom: 2px solid var(--color-gris-claro);
 }
 
 .header-content {
