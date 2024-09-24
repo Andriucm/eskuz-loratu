@@ -3,14 +3,37 @@ import { ref, onMounted, computed } from 'vue';
 import { useProductsStore } from '@/stores/products';
 import Loader from '@/components/Loader.vue';
 import OpeningAnimation from '@/components/OpeningAnimation.vue';
-import Lightbox from '@/components/Lightbox.vue'; // Importamos el componente Lightbox
+import Lightbox from '@/components/Lightbox.vue';
+import Carousel from '@/components/Carousel.vue';
 
 // Obtener el store de productos
 const productStore = useProductsStore();
+const isInstallable = ref(false);
+let deferredPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    isInstallable.value = true;
+});
+
+const installPWA = async () => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+            console.log('Instalación aceptada');
+        }
+        deferredPrompt = null;
+        isInstallable.value = false;
+    }
+};
+
 
 // Cargar productos al montar el componente
 onMounted(() => {
     productStore.getProducts();
+
 });
 
 // Computed para acceder a los productos y estado de carga
@@ -58,6 +81,7 @@ const redirectTo = (link) => {
 <template>
     <OpeningAnimation />
     <main>
+        <button v-if="isInstallable" @click="installPWA">Instalar PWA</button>
         <div class="product-header">
             <div class="search-container">
                 <input type="text" placeholder="Bitxiar topatu..." v-model="searchQuery"
@@ -66,12 +90,11 @@ const redirectTo = (link) => {
                 <i class="fas fa-search search-icon"></i>
             </div>
         </div>
-
-        <!-- Mostrar estado de carga -->
         <Loader v-if="loading" />
 
         <!-- Mostrar productos cuando se carguen -->
         <div v-else-if="filteredProducts.length" class="product-container">
+            <Carousel></Carousel>
             <div v-for="product in filteredProducts" :key="product.id" class="product-card">
                 <img :src="product.image" :alt="product.name" class="product-image" />
                 <div class="product-info">
@@ -100,16 +123,6 @@ const redirectTo = (link) => {
 </template>
 
 <style scoped>
-main {
-    max-width: 1200px;
-    min-height: 100vh;
-    margin: 0 auto;
-    padding: 2rem 0;
-    text-align: left;
-    background-color: var(--color-principal);
-    font-family: 'Arial, sans-serif';
-}
-
 h1 {
     font-size: 2.5rem;
     transition: color 0.3s ease;
@@ -141,7 +154,7 @@ h1:hover {
     width: 100%;
     padding: 0.5rem 2.5rem 0.5rem 1rem;
     outline: none;
-    border:none;
+    border: none;
     border-radius: 5px;
     font-size: var(--font-size-p);
     font-family: var(--font-family-secondary);

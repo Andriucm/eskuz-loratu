@@ -1,6 +1,6 @@
 import { createApp } from "vue";
-import "./assets/normalize.css";
-import "./assets/global.css";
+import "./assets/css/normalize.css";
+import "./assets/css/global.css";
 
 import { createPinia } from "pinia";
 
@@ -9,18 +9,22 @@ import router from "./router";
 
 //Firebase
 import { VueFire, VueFireAuth } from "vuefire";
-import { firebaseApp, analytics } from "@/config/firebase";
+import { firebaseApp, analytics, auth } from "@/config/firebase";
+import './registerServiceWorker'
+
+//Carousel
+import { register } from 'swiper/element/bundle';
 
 const app = createApp(App);
 
 app.use(VueFire, {
-	firebaseApp,
-	analytics,
+    firebaseApp,
 	modules: [VueFireAuth],
 });
 
 app.use(createPinia());
 
 app.use(router);
+register();
 
 app.mount("#app");

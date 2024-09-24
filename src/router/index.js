@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "../views/HomePage.vue";
+import { useAuth } from "@/services/authFirebase";
+import { useAuthStore } from "@/stores/auth";
+const { observeAuthState } = useAuth();
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,17 +13,50 @@ const router = createRouter({
 			component: HomePage,
 		},
 		{
+			path: "/login",
+			name: "login",
+			component: () => import("../views/Login.vue"),
+		},
+		{
 			path: "/add",
 			name: "addJewel",
 			component: () => import("../views/AddJewelView.vue"),
-			beforeEnter: autenticate,
+			meta: {
+				requiresAuth: true,
+			},
 		},
 	],
 });
 
-function autenticate(to, from, next) {
-	const reqParam = to.query.login;
+const getCurrentUser = () => {
+	return new Promise((resolve, reject) => {
+		const removeListener = observeAuthState((user) => {
+			removeListener();
+			resolve(user);
+		}, reject);
+	});
+};
 
-	reqParam === "odrytes46" ? next() : next({ name: "home" });
-}
+router.beforeEach(async (to, from, next) => {
+	const authStore = useAuthStore();
+	try {
+		const user = await getCurrentUser();
+		authStore.isLoggedIn = !!user;
+		if (to.matched.some((record) => record.meta.requiresAuth)) {
+			if (user) {
+				next();
+			} else {
+				next({ name: "login" });
+			}
+		} else {
+			next();
+		}
+	} catch (error) {
+		console.error("Error en la autenticación:", error);
+		next({ name: "home" });
+	}
+
+	console.log("router.beforeEach authStore.isLoggedIn:", authStore.isLoggedIn);
+});
+
 export default router;

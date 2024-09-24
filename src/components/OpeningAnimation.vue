@@ -108,7 +108,7 @@ onUnmounted(() => {
 }
 
 .text-content h1 {
-    font-family: var(--font-family-primary, Arial, sans-serif);
+    font-family: var(--font-family-primary);
     color: var(--color-gris-oscuro, #333);
     margin: 0.5rem 0;
 }

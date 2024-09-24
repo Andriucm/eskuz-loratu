@@ -1,12 +1,21 @@
+<script setup>
+import { useAuthStore } from "@/stores/auth";
+const authStore = useAuthStore();
+</script>
 <template>
     <header class="mobile-header">
         <div class="header-content">
-            <div class="logo">
-                <!-- Puedes reemplazar el texto por una imagen si tienes un logo gráfico -->
-                <img src="../assets/logo.jpg" alt="Logo de la web">
-                <h1>Eskuz Loratu</h1>
-            </div>
+            <RouterLink :to="{ name: 'home' }">
+                <div class="logo">
+                    <!-- Puedes reemplazar el texto por una imagen si tienes un logo gráfico -->
+                    <img src="../assets/img/logo.jpg" alt="Logo de la web">
+                    <h1>Eskuz Loratu</h1>
+                </div>
+            </RouterLink>
             <div class="social-link">
+                <RouterLink v-if="authStore.isLoggedIn" :to="{ name: 'addJewel' }"><i class="fa-solid fa-plus"></i>
+                </RouterLink>
+
                 <a href="https://www.instagram.com/eskuz_loratu/" target="_blank" aria-label="Instagram">
                     <svg class="icon" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <title>Instagram</title>
@@ -51,6 +60,28 @@
     color: var(--color-gris-oscuro);
     margin: 0;
     line-height: 1;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    /* Transición para los elementos dentro del RouterLink */
+    a i {
+        font-size: 2.4rem;
+        color: #E4405F;
+        transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+        /* Efecto de transición suave */
+    }
+
+    /* Efecto de rotación cuando haces hover sobre el RouterLink */
+    a:hover i {
+        transform: rotate(360deg);
+        /* Rotar el ícono 360 grados */
+        color: var(--color-turquesa);
+        /* Cambiar el color del ícono */
+    }
 }
 
 .social-link a {

@@ -46,10 +46,18 @@ body,
 body {
   font-family: var(--font-family-secondary);
   color: var(--color-gris-oscuro);
-  background-image: url('../assets/protruding-squares.svg');
+  background-image: url('../svg/main-background.svg');
 
 }
 
+main {
+    max-width: 1200px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 2rem 0;
+    text-align: left;
+    background-color: transparent;
+}
 /* Enlaces */
 a {
   text-decoration: none;
@@ -60,7 +68,7 @@ a {
 }
 
 a:hover {
-  text-decoration: underline;
+    color: var(--color-oro-metalico);
   transition: color 0.3s ease-in-out;
 
 }
