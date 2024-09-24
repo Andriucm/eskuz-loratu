@@ -14,7 +14,7 @@ let deferredPrompt = null;
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    isInstallable.value = true;
+    isInstallable.value = true; // Muestra el botón
 });
 
 const installPWA = async () => {
@@ -24,11 +24,10 @@ const installPWA = async () => {
         if (outcome === 'accepted') {
             console.log('Instalación aceptada');
         }
-        deferredPrompt = null;
-        isInstallable.value = false;
+        deferredPrompt = null; // Limpia el prompt después de la instalación
+        isInstallable.value = false; // Oculta el botón
     }
 };
-
 
 // Cargar productos al montar el componente
 onMounted(() => {
@@ -81,8 +80,8 @@ const redirectTo = (link) => {
 <template>
     <OpeningAnimation />
     <main>
-        <button v-if="isInstallable" @click="installPWA">Instalar PWA</button>
         <div class="product-header">
+            <button v-if="isInstallable" @click="installPWA">Instalar App</button>
             <div class="search-container">
                 <input type="text" placeholder="Bitxiar topatu..." v-model="searchQuery"
                     aria-label="Buscar productos" />
