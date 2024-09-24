@@ -6,11 +6,11 @@ import { createPinia } from "pinia";
 
 import App from "./App.vue";
 import router from "./router";
+import './registerServiceWorker'
 
 //Firebase
 import { VueFire, VueFireAuth } from "vuefire";
 import { firebaseApp, analytics, auth } from "@/config/firebase";
-import './registerServiceWorker'
 
 //Carousel
 import { register } from 'swiper/element/bundle';

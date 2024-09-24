@@ -3,12 +3,12 @@
     "short_name": "Eskuz Loratu",
     "icons": [
         {
-            "src": "/src/assets/img/logo.jpg",
+            "src": "/public/img/icons/logo.jpg",
             "sizes": "192x192",
             "type": "image/jpg"
         },
         {
-            "src": "/src/assets/img/logo.jpg",
+            "src": "/public/img/icons/logo.jpg",
             "sizes": "512x512",
             "type": "image/jpg"
         }
