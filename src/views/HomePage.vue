@@ -1,14 +1,13 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted, computed, inject } from 'vue';
 import { useProductsStore } from '@/stores/products';
 import Loader from '@/components/Loader.vue';
 import OpeningAnimation from '@/components/OpeningAnimation.vue';
 import Lightbox from '@/components/Lightbox.vue';
 import Carousel from '@/components/Carousel.vue';
-import { usePWA } from '@/composables/usePWA';
 
-const { isInstallable, installPWA } = usePWA();
-
+const isInstallable = inject('isInstallable');
+const installPWA = inject('installPWA');
 // Obtener el store de productos
 const productStore = useProductsStore();
 const faqSelected = ref(false)
@@ -78,7 +77,6 @@ const toggleFaq = () => {
             </button>
             
             <div class="product-header">
-            <button v-if="isInstallable" @click="installPWA" class="button-primary">Instalar App</button>
             <div class="search-container">
                 <input type="text" placeholder="Bitxiar topatu..." v-model="searchQuery"
                     aria-label="Buscar productos" />
