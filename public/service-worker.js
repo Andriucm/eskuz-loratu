@@ -2,12 +2,14 @@ const CACHE_NAME = "pwa-cache-v1";
 const urlsToCache = ["/", "/index.html", "/pwa-192x192.png", "/pwa-512x512.png"];
 
 self.addEventListener("install", (event) => {
+	self.skipWaiting(); // Fuerza la activación de inmediato
 	event.waitUntil(
 		caches.open(CACHE_NAME).then((cache) => {
 			return cache.addAll(urlsToCache);
 		})
 	);
 });
+
 
 self.addEventListener("fetch", (event) => {
 	event.respondWith(
@@ -16,6 +18,7 @@ self.addEventListener("fetch", (event) => {
 		})
 	);
 });
+
 
 self.addEventListener("activate", (event) => {
 	const cacheWhitelist = [CACHE_NAME];
@@ -30,4 +33,5 @@ self.addEventListener("activate", (event) => {
 			);
 		})
 	);
+	self.clients.claim(); // Toma el control de la página de inmediato
 });

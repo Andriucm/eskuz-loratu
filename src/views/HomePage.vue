@@ -5,29 +5,13 @@ import Loader from '@/components/Loader.vue';
 import OpeningAnimation from '@/components/OpeningAnimation.vue';
 import Lightbox from '@/components/Lightbox.vue';
 import Carousel from '@/components/Carousel.vue';
+import { usePWA } from '@/composables/usePWA';
+
+const { isInstallable, installPWA } = usePWA();
 
 // Obtener el store de productos
 const productStore = useProductsStore();
-const isInstallable = ref(false);
-let deferredPrompt = null;
-
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    isInstallable.value = true; // Muestra el botón
-});
-
-const installPWA = async () => {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') {
-            console.log('Instalación aceptada');
-        }
-        deferredPrompt = null; // Limpia el prompt después de la instalación
-        isInstallable.value = false; // Oculta el botón
-    }
-};
+const faqSelected = ref(false)
 
 // Cargar productos al montar el componente
 onMounted(() => {
@@ -74,14 +58,27 @@ const redirectTo = (link) => {
     window.open(link, '_blank');
 }
 
+const toggleFaq = () => {
+    faqSelected.value = !faqSelected.value
+}
 
 </script>
 
 <template>
     <OpeningAnimation />
     <main>
-        <div class="product-header">
-            <button v-if="isInstallable" @click="installPWA">Instalar App</button>
+        <button @click="toggleFaq" class="faq-button" :class="{ 'faq-button-selected': faqSelected }">
+            <i class="fa-solid fa-question"></i>
+            <div class="tooltip" :class="{ 'faq-button-selected-tooltip': faqSelected }">
+                <h3>Instala nuestra App</h3>
+                <p>Descubre la comodidad de tener acceso a nuestra app en todo momento, directamente desde tu
+                    dispositivo.</p>
+                    <button v-if="isInstallable" @click="installPWA" class="button-primary">Instalar App</button>
+                </div>
+            </button>
+            
+            <div class="product-header">
+            <button v-if="isInstallable" @click="installPWA" class="button-primary">Instalar App</button>
             <div class="search-container">
                 <input type="text" placeholder="Bitxiar topatu..." v-model="searchQuery"
                     aria-label="Buscar productos" />
@@ -122,6 +119,12 @@ const redirectTo = (link) => {
 </template>
 
 <style scoped>
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
 h1 {
     font-size: 2.5rem;
     transition: color 0.3s ease;
@@ -291,6 +294,95 @@ p {
     font-size: 1.2em;
 }
 
+
+/* From Uiverse.io by vinodjangid07 */
+.faq-button {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--color-turquesa);
+    background-image: linear-gradient(147deg, var(--color-blanco) 0%, var(--color-fondo) 74%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.151);
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 1;
+    transition: all 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+.faq-button i {
+    font-size: 1.8rem;
+    fill: var(--color-gris-oscuro);
+}
+
+.faq-button:hover i {
+    animation: jello-vertical 0.7s both;
+}
+
+@keyframes jello-vertical {
+    0% {
+        transform: scale3d(1, 1, 1);
+    }
+
+    30% {
+        transform: scale3d(0.75, 1.25, 1);
+    }
+
+    40% {
+        transform: scale3d(1.25, 0.75, 1);
+    }
+
+    50% {
+        transform: scale3d(0.85, 1.15, 1);
+    }
+
+    65% {
+        transform: scale3d(1.05, 0.95, 1);
+    }
+
+    75% {
+        transform: scale3d(0.95, 1.05, 1);
+    }
+
+    100% {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+.tooltip {
+    position: absolute;
+    bottom: 130%;
+    opacity: 0;
+    background-color: var(--color-turquesa);
+    background-image: linear-gradient(147deg, var(--color-blanco) 0%, var(--color-fondo) 74%);
+    padding: .5rem 1rem;
+    border-radius: 5px;
+    display: flex;
+    width: 15rem;
+    align-items: center;
+    justify-content: center;
+    transition-duration: 0.2s;
+    pointer-events: none;
+    letter-spacing: 0.5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.faq-button-selected-tooltip {
+    opacity: 1;
+    transition-duration: 0.3s;
+}
+
+.faq-button-selected {
+    right: 8rem;
+    transform: translate(50%, 0);
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
 
 @keyframes fadeInUp {
     to {

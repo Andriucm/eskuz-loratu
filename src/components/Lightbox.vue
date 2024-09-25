@@ -7,8 +7,7 @@
 </template>
 
 <script setup>
-import { watch, onMounted, onBeforeUnmount } from 'vue';
-import { defineProps, defineEmits } from 'vue';
+import { watch, onBeforeUnmount } from 'vue';
 
 // Props recibidas
 const props = defineProps({
