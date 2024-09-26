@@ -99,7 +99,7 @@ const authStore = useAuthStore();
 }
 
 .social-link .icon {
-    fill: #E4405F;
+    fill:var(--color-actions);
     /* Default Instagram color */
     width: 24px;
     height: 24px;
