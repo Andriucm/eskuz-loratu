@@ -1,8 +1,12 @@
 <script setup>
 import { ref, inject, onMounted } from 'vue';
+import { useGuideStore } from '@/stores/guide';
+const guideStore = useGuideStore();
 
 const isInstallable = inject('isInstallable');
 const installPWA = inject('installPWA');
+const isIOS = inject('isIOS');
+
 const faqSelected = ref(false);
 
 const toggleFaq = () => {
@@ -15,6 +19,10 @@ const handleClickOutside = (event) => {
         faqSelected.value = false;
     }
 };
+
+const showGuide = () => {
+    guideStore.toggleGuide();
+}
 
 onMounted(() => {
     document.addEventListener('click', handleClickOutside);
@@ -29,7 +37,8 @@ onMounted(() => {
             <p class="tooltip-description">
                 Descubre la comodidad de tener acceso a nuestra app en todo momento, directamente desde tu dispositivo.
             </p>
-            <button v-if="isInstallable" @click="installPWA" class="button-primary">Instalar App</button>
+            <button v-if="isInstallable && !isIOS" @click="installPWA" class="button-primary">Instalar App</button>
+            <button v-else-if="isIOS" @click="showGuide" class="button-primary">Como hacerlo</button>
         </div>
     </button>
 </template>
@@ -68,7 +77,29 @@ onMounted(() => {
         transform: scale3d(1, 1, 1);
     }
 
-    /* Resto de la animación */
+    30% {
+        transform: scale3d(0.75, 1.25, 1);
+    }
+
+    40% {
+        transform: scale3d(1.25, 0.75, 1);
+    }
+
+    50% {
+        transform: scale3d(0.85, 1.15, 1);
+    }
+
+    65% {
+        transform: scale3d(1.05, 0.95, 1);
+    }
+
+    75% {
+        transform: scale3d(0.95, 1.05, 1);
+    }
+
+    100% {
+        transform: scale3d(1, 1, 1);
+    }
 }
 
 .tooltip {
@@ -88,10 +119,15 @@ onMounted(() => {
     letter-spacing: 0.5px;
     flex-direction: column;
     gap: 1rem;
+
+    h3 {
+        font-weight: var(--font-weight-bold);
+    }
 }
 
 .tooltip-description {
     color: var(--color-turquesa);
+    font-size: var(--font-size-p);
 }
 
 .faq-button-selected-tooltip {

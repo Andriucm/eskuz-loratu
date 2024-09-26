@@ -8,6 +8,7 @@ import Carousel from '@/components/Carousel.vue';
 import FaqButton from '@/components/FAQButton.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import ProductCard from '@/components/ProductCard.vue';
+import GuideLightBox from '@/components/GuideLightBox.vue';
 
 // Obtener el store de productos
 const productStore = useProductsStore();
@@ -72,6 +73,8 @@ const filteredProducts = computed(() => {
         <p v-else>Bitxiak ez dira topatu :( </p>
 
         <Lightbox :image="selectedImage" :visible="visible" @close="closeLightbox" />
+        <GuideLightBox />
+
     </main>
 </template>
 

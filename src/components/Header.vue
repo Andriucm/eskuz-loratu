@@ -1,7 +1,15 @@
 <script setup>
 import { inject } from 'vue';
+import { useGuideStore } from '@/stores/guide';
+
+const guideStore = useGuideStore();
+const showGuide = () => {
+    guideStore.toggleGuide();
+}
+
 const isInstallable = inject('isInstallable');
 const installPWA = inject('installPWA');
+const isIOS = inject('isIOS');
 
 import { useAuthStore } from "@/stores/auth";
 const authStore = useAuthStore();
@@ -17,7 +25,8 @@ const authStore = useAuthStore();
                 </div>
             </RouterLink>
             <div class="social-link">
-                <i v-if="isInstallable" @click="installPWA" class="fa-solid fa-circle-arrow-down"></i>
+                <i v-if="isInstallable && !isIOS" @click="installPWA" class="fa-solid fa-circle-arrow-down"></i>
+                <i v-else-if="isIOS" @click="showGuide" class="fa-solid fa-circle-question"></i>
 
                 <RouterLink v-if="authStore.isLoggedIn" :to="{ name: 'addJewel' }">
                     <i class="fa-solid fa-plus"></i>
@@ -88,7 +97,7 @@ const authStore = useAuthStore();
     i:hover {
         transform: rotate(360deg);
         color: var(--color-turquesa);
-        /* Color change on hover */
+        cursor: pointer;
     }
 }
 
@@ -99,14 +108,13 @@ const authStore = useAuthStore();
 }
 
 .social-link .icon {
-    fill:var(--color-actions);
-    /* Default Instagram color */
+    fill: var(--color-actions);
     width: 24px;
     height: 24px;
     transition: fill 0.3s ease-in-out;
 }
 
-.social-link a:hover >.icon {
+.social-link a:hover>.icon {
     fill: var(--color-turquesa);
 }
 </style>

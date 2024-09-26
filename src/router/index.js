@@ -56,7 +56,6 @@ router.beforeEach(async (to, from, next) => {
 		next({ name: "home" });
 	}
 
-	console.log("router.beforeEach authStore.isLoggedIn:", authStore.isLoggedIn);
 });
 
 export default router;
