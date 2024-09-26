@@ -35,10 +35,10 @@ onMounted(() => {
         <div class="tooltip" :class="{ 'faq-button-selected-tooltip': faqSelected }">
             <h3>Instala nuestra App</h3>
             <p class="tooltip-description">
-                Descubre la comodidad de tener acceso a nuestra app en todo momento, directamente desde tu dispositivo.
+                Accede a nuestra Galeria Digital con nuestra App, directamente desde tu dispositivo.
             </p>
             <button v-if="isInstallable && !isIOS" @click="installPWA" class="button-primary">Instalar App</button>
-            <button v-else-if="isIOS" @click="showGuide" class="button-primary">Como hacerlo</button>
+            <button v-else-if="isInstallable && isIOS" @click="showGuide" class="button-primary">Como hacerlo</button>
         </div>
     </button>
 </template>

@@ -20,7 +20,7 @@ const emit = defineEmits(['update:modelValue']);
 <style scoped>
 .search-container {
     position: relative;
-    width: 300px;
+    width: 100%;
 }
 
 .search-container input {
@@ -29,17 +29,36 @@ const emit = defineEmits(['update:modelValue']);
     padding: 0.5rem 2.5rem 0.5rem 1rem;
     outline: none;
     border: none;
-    border-radius: 5px;
     font-size: var(--font-size-p);
     font-family: var(--font-family-secondary);
     font-weight: var(--font-weight-regular);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
     color: var(--color-gris-oscuro);
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
 }
 
 .search-container input:focus {
-    border-color: var(--color-gris-oscuro);
-    box-shadow: 0 0 5px var(--color-gris-oscuro);
+    border-bottom-color: var(--color-gris-oscuro);
+    transform-origin: left;
+    transform: scaleX(1);
+    transition: all 0.3s ease;
+}
+
+.search-container input::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background-color: var(--color-gris-oscuro);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.search-container input:focus::before {
+    transform: scaleX(1);
 }
 
 .search-icon {

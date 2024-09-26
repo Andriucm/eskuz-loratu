@@ -10,7 +10,7 @@ import './registerServiceWorker'
 
 //Firebase
 import { VueFire, VueFireAuth } from "vuefire";
-import { firebaseApp, analytics, auth } from "@/config/firebase";
+import { firebaseApp } from "@/config/firebase";
 
 //Carousel
 import { register } from 'swiper/element/bundle';

@@ -26,7 +26,7 @@ const authStore = useAuthStore();
             </RouterLink>
             <div class="social-link">
                 <i v-if="isInstallable && !isIOS" @click="installPWA" class="fa-solid fa-circle-arrow-down"></i>
-                <i v-else-if="isIOS" @click="showGuide" class="fa-solid fa-circle-question"></i>
+                <i v-else-if="isInstallable && isIOS" @click="showGuide" class="fa-solid fa-circle-question"></i>
 
                 <RouterLink v-if="authStore.isLoggedIn" :to="{ name: 'addJewel' }">
                     <i class="fa-solid fa-plus"></i>
