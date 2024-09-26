@@ -4,6 +4,7 @@
 :root {
   /* Colores */
   --color-turquesa: rgb(64, 224, 208);
+  --color-actions:#E4405F;
   --color-fondo: rgb(232, 248, 246);
   --color-blanco: rgb(255, 255, 255);
   --color-gris-oscuro: rgb(51, 51, 51);
@@ -84,7 +85,7 @@ button {
 
 /* Botones primarios */
 .button-primary {
-  background-color: var(--color-turquesa);
+  background-color: var(--color-actions);
   color: var(--color-blanco);
   font-family: var(--font-family-secondary);
   font-size: var(--font-size-p);
@@ -93,6 +94,8 @@ button {
   padding: 10px 20px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
+    border-radius: 5px;
+
 }
 
 .button-primary:hover {
@@ -102,14 +105,16 @@ button {
 /* Botones secundarios */
 .button-secondary {
   background-color: transparent;
-  color: var(--color-turquesa);
+  color: var(--color-actions);
   font-family: var(--font-family-secondary);
   font-size: var(--font-size-p);
   font-weight: var(--font-weight-medium);
-  border: 2px solid var(--color-turquesa);
+  border: 2px solid var(--color-actions);
   padding: 10px 20px;
   cursor: pointer;
   transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    border-radius: 5px;
+
 }
 
 .button-secondary:hover {
