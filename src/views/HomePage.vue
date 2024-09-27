@@ -3,12 +3,12 @@ import { ref, onMounted, computed } from 'vue';
 import { useProductsStore } from '@/stores/products';
 import Loader from '@/components/Loader.vue';
 import OpeningAnimation from '@/components/OpeningAnimation.vue';
-import Lightbox from '@/components/Lightbox.vue';
 import Carousel from '@/components/Carousel.vue';
 import FaqButton from '@/components/FAQButton.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import ProductCard from '@/components/ProductCard.vue';
 import GuideLightBox from '@/components/GuideLightBox.vue';
+
 
 // Obtener el store de productos
 const productStore = useProductsStore();
@@ -65,7 +65,7 @@ const filteredProducts = computed(() => {
         <Loader v-if="loading" />
 
         <div v-else-if="filteredProducts.length" class="product-container">
-            <Carousel></Carousel>
+            <Carousel :products="filteredProducts"></Carousel>
             <ProductCard v-for="product in filteredProducts" :key="product.id" :product="product"
                 @open-lightbox="openLightbox" />
         </div>
@@ -99,6 +99,7 @@ main {
     justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
+    padding: 1rem;
     gap: 20px;
 }
 

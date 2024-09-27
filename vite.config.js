@@ -1,8 +1,9 @@
 import { fileURLToPath, URL } from "node:url";
-
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import { VitePWA } from "vite-plugin-pwa";
+import tailwind from "tailwindcss";
+import autoprefixer from "autoprefixer";
 
 export default defineConfig({
 	base: "/",
@@ -50,6 +51,11 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			"@": fileURLToPath(new URL("./src", import.meta.url)),
+		},
+	},
+	css: {
+		postcss: {
+			plugins: [tailwind(), autoprefixer()],
 		},
 	},
 });

@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import "./assets/css/normalize.css";
+import "./assets/css/index.css";
 import "./assets/css/global.css";
 
 import { createPinia } from "pinia";
@@ -8,12 +9,13 @@ import App from "./App.vue";
 import router from "./router";
 import './registerServiceWorker'
 
+import Lightbox from "@/components/Lightbox.vue";
+
+
 //Firebase
 import { VueFire, VueFireAuth } from "vuefire";
 import { firebaseApp } from "@/config/firebase";
 
-//Carousel
-import { register } from 'swiper/element/bundle';
 
 const app = createApp(App);
 
@@ -25,6 +27,7 @@ app.use(VueFire, {
 app.use(createPinia());
 
 app.use(router);
-register();
+
+app.component("Lightbox", Lightbox);
 
 app.mount("#app");

@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps, defineEmits } from 'vue';
 
 const props = defineProps({
     product: {
@@ -47,7 +46,6 @@ const redirectTo = (link) => {
     display: flex;
     flex-direction: column;
     text-align: left;
-    padding: 1rem;
     border-radius: 8px;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     width: 100%;
