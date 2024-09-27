@@ -51,7 +51,6 @@ const closeLightbox = () => {
             loop: true,
             rewind: true,
             perPage: 3,
-            perMove: 1,
             pagination: 'fraction',
         }" :plugins="[autoPlay]">
             <CarouselContent>
