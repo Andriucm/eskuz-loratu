@@ -11,7 +11,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import Autoplay from 'embla-carousel-autoplay'
 
 const autoPlay = Autoplay({
-    delay: 1000,
+    delay: 1500,
     stopOnMouseEnter: true,
     stopOnInteraction: false,
 })

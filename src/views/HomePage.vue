@@ -9,7 +9,6 @@ import SearchBar from '@/components/SearchBar.vue';
 import ProductCard from '@/components/ProductCard.vue';
 import GuideLightBox from '@/components/GuideLightBox.vue';
 
-
 // Obtener el store de productos
 const productStore = useProductsStore();
 
@@ -53,6 +52,14 @@ const filteredProducts = computed(() => {
             product.price.toString().includes(query)
     );
 });
+
+// Función para hacer scroll a la sección de productos
+const scrollToProducts = () => {
+    const productContainer = document.getElementById('product-container');
+    if (productContainer) {
+        productContainer.scrollIntoView({ behavior: 'smooth' });
+    }
+};
 </script>
 
 <template>
@@ -60,12 +67,19 @@ const filteredProducts = computed(() => {
     <main>
         <FaqButton />
         <div class="product-header">
-            <SearchBar v-model="searchQuery" />
+            <h3>Eskuz egindako bitxiak, loreen edertasuna zurekin daramazu.</h3>
+            <span>"Eskuz Loratu bitxi marka artisau-lana eta naturaren inspirazioa uztartzen ditu. Loreen edertasuna eta
+                artisautzaren xarma pieza bakar bihurtzen ditugu, zure esentzia islatzeko. Eskuz egindako bitxi bakoitza
+                maitasunez eta dedikazioz sortzen dugu, emozioak transmitituz eta edertasun unibertsala ospatuz."
+            </span>
+            <Carousel v-if="products.length" :products="products"></Carousel>
+            <!-- Usamos la función scrollToProducts en el @click -->
+            <button class="button-primary" @click="scrollToProducts">¡Irudiak!</button>
         </div>
         <Loader v-if="loading" />
 
-        <div v-else-if="filteredProducts.length" class="product-container">
-            <Carousel :products="filteredProducts"></Carousel>
+        <div v-else-if="filteredProducts.length" class="product-container" id="product-container">
+            <SearchBar v-model="searchQuery" />
             <ProductCard v-for="product in filteredProducts" :key="product.id" :product="product"
                 @open-lightbox="openLightbox" />
         </div>
@@ -74,12 +88,12 @@ const filteredProducts = computed(() => {
 
         <Lightbox :image="selectedImage" :visible="visible" @close="closeLightbox" />
         <GuideLightBox />
-
     </main>
 </template>
 
 <style scoped>
 main {
+    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -87,10 +101,35 @@ main {
 
 .product-header {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    margin: 0 2rem 3rem 2rem;
-    gap: 3rem;
+    justify-content: center;
+    text-align: center;
+    background: rgba(245, 245, 245, 0.5);
+    padding: 2rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    gap: 1.5rem;
+    height: calc(100vh - 4rem);
+}
+
+.product-header h3 {
+    font-size: 3rem;
+    /* Tamaño de fuente más grande */
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    /* Espaciado de letras */
+}
+
+.product-header span {
+    font-size: 1.6em;
+    /* Tamaño de fuente más pequeño para descripción */
+    font-style: italic;
+    /* Descripción en cursiva */
+    line-height: 1.5;
+    /* Mejorar legibilidad */
+    color: #555;
+    /* Color gris oscuro */
 }
 
 .product-container {
