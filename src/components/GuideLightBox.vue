@@ -61,13 +61,22 @@ onBeforeUnmount(() => {
 }
 
 .lightbox-content {
+
     background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 90%;
-    max-height: 90%;
+    padding: 1rem 2rem ;
+    border-radius: 5px;
+    max-width: 95%;
+    max-height: 100%;
     box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
     border: 5px solid var(--color-blanco);
+
+    h3{
+        text-align: center;
+    }
+}
+.lightbox-content ol li{
+    font-size: 1.4rem;
+    list-style-type: decimal;
 }
 
 .close {
