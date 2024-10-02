@@ -86,6 +86,9 @@ const submitForm = async () => {
         }
 
         const { image, ...values } = formData;
+        // Añadir la fecha de creación
+        values.createdAt = new Date().toISOString(); 
+
         try {
             await productStore.createProduct({ ...values, image: url.value });
             successMessage.value = "Joya añadida correctamente";

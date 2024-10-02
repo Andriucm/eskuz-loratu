@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { formatCurrency } from '@/utils';
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+
 import {
     Sheet,
     SheetClose,
@@ -58,7 +58,7 @@ const username = ref('')
                 <SheetTitle class="sheet-title ">{{ product.name }}
                 </SheetTitle>
                 <SheetDescription class="sheet-description  mt-2 mb-4">
-                    {{ product.description }}
+                    {{ formatCurrency(product.price) }}
                 </SheetDescription>
             </SheetHeader>
 

@@ -3,6 +3,8 @@ import { provide } from 'vue';
 import { RouterView } from 'vue-router';
 import Header from './components/Header.vue';
 import Footer from '@/components/Footer.vue';
+import OpeningAnimation from '@/components/OpeningAnimation.vue';
+
 
 import { usePWA } from '@/composables/usePWA';
 import { usePlatform } from '@/composables/usePlatform';
@@ -19,4 +21,5 @@ provide('isIOS', isIOS);
     <Header />
     <RouterView />
     <Footer />
+    <OpeningAnimation />
 </template>

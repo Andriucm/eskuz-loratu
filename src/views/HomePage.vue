@@ -2,27 +2,61 @@
 import { ref, onMounted, computed } from 'vue';
 import { useProductsStore } from '@/stores/products';
 import Loader from '@/components/Loader.vue';
-import OpeningAnimation from '@/components/OpeningAnimation.vue';
 import Carousel from '@/components/Carousel.vue';
-import FaqButton from '@/components/FAQButton.vue';
-import SearchBar from '@/components/SearchBar.vue';
+import FAQButton from '@/components/FAQButton.vue';
 import ProductCard from '@/components/ProductCard.vue';
 import GuideLightBox from '@/components/GuideLightBox.vue';
 import MenuContainer from '@/components/MenuContainer.vue';
+import FilterComponent from '@/components/FilterComponent.vue';
 
 const productStore = useProductsStore();
 
+// Obtener los productos al montar el componente
 onMounted(() => {
     productStore.getProducts();
 });
 
+// Variables reactivas y computadas
 const products = computed(() => productStore.products);
 const loading = computed(() => productStore.loading);
-
 const visible = ref(false);
 const selectedImage = ref('');
-const viewMode = ref('image'); // Vista inicial en modo 'image'
+const viewMode = ref('image');
+const sortOrder = ref('price-asc');
+const minPrice = ref(0);
+const maxPrice = ref(100);
 
+// Computed para filtrar y ordenar productos automáticamente
+const filteredProducts = computed(() => {
+    let filtered = products.value;
+
+    // Filtrar por rango de precios
+    filtered = filtered.filter(
+        (product) => product.price >= minPrice.value && product.price <= maxPrice.value
+    );
+
+    // Ordenar según el criterio seleccionado
+    filtered.sort((a, b) => {
+        if (sortOrder.value === 'price-asc') return a.price - b.price;
+        if (sortOrder.value === 'price-desc') return b.price - a.price;
+        if (sortOrder.value === 'date-asc') return new Date(a.createdAt) - new Date(b.createdAt);
+        if (sortOrder.value === 'date-desc') return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+
+    return filtered;
+});
+
+// Funciones para manejar los eventos emitidos por el componente de filtro
+const handleOrderChange = (order) => {
+    sortOrder.value = order;
+};
+
+const handlePriceFilter = ({ minPrice: newMin, maxPrice: newMax }) => {
+    minPrice.value = newMin;
+    maxPrice.value = newMax;
+};
+
+// Abrir y cerrar Lightbox
 const openLightbox = (image) => {
     selectedImage.value = image;
     visible.value = true;
@@ -32,21 +66,7 @@ const closeLightbox = () => {
     visible.value = false;
 };
 
-const searchQuery = ref('');
-
-const filteredProducts = computed(() => {
-    if (!searchQuery.value.trim()) {
-        return products.value;
-    }
-    const query = searchQuery.value.toLowerCase();
-    return products.value.filter(
-        (product) =>
-            product.name.toLowerCase().includes(query) ||
-            product.description.toLowerCase().includes(query) ||
-            product.price.toString().includes(query)
-    );
-});
-
+// Función para hacer scroll a los productos
 const scrollToProducts = () => {
     const productContainer = document.getElementById('product-container');
     if (productContainer) {
@@ -54,15 +74,16 @@ const scrollToProducts = () => {
     }
 };
 
+// Cambiar vista
 const changeView = (view) => {
     viewMode.value = view;
 };
 </script>
 
+
 <template>
-    <OpeningAnimation />
     <main>
-        <FaqButton />
+        <FAQButton />
         <div class="product-header">
             <div>
                 <h3>Eskuz egindako bitxiak, loreen edertasuna zurekin daramazu.</h3>
@@ -79,9 +100,9 @@ const changeView = (view) => {
 
         <!-- Contenedor para SearchBar y MenuContainer -->
         <div v-else-if="products.length" class="product-container" id="product-container">
-            <div class="search-menu-container">
-                <SearchBar v-model="searchQuery" />
+            <div class="tools-menu-container">
                 <MenuContainer @changeView="changeView" :viewMode="viewMode" />
+                <FilterComponent @order-change="handleOrderChange" @price-filter="handlePriceFilter" />
             </div>
 
             <!-- Contenedor para los productos en modo collage o grid -->
@@ -143,7 +164,7 @@ main {
 }
 
 /* Contenedor para SearchBar y MenuContainer */
-.search-menu-container {
+.tools-menu-container {
     width: 100%;
     display: flex;
     flex-direction: column;
