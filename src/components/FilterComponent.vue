@@ -1,6 +1,5 @@
 <script setup>
 import { ref, computed } from 'vue';
-import { Button } from '@/components/ui/button';
 import {
     Sheet,
     SheetClose,
@@ -81,9 +80,9 @@ const applyFilters = () => {
             <SheetFooter class="flex mt-4">
                 <!-- Al hacer clic en "Cerrar" se aplican los filtros -->
                 <SheetClose as-child>
-                    <Button class="button-primary" @click="applyFilters">
+                    <button class="button-primary" @click="applyFilters">
                         Aplicar Filtros
-                    </Button>
+                    </button>
                 </SheetClose>
             </SheetFooter>
         </SheetContent>
