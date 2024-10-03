@@ -27,7 +27,7 @@ const changeView = (view) => {
             </button>
 
             <!-- Botón para la vista tipo imágenes múltiples -->
-            <button class="item button-primary" :class="{ active: props.viewMode === 'gallery' }" @click="changeView('gallery')">
+            <button class="item button-primary" :class="{ active: props.viewMode === 'carousel' }" @click="changeView('carousel')">
                 <i class="fa-regular fa-images"></i>
             </button>
         </div>

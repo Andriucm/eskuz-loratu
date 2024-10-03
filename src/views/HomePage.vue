@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed, watch } from "vue";
+import { ref, onMounted, computed, watch, nextTick } from "vue";
 import { useProductsStore } from "@/stores/products";
 import Loader from "@/components/Loader.vue";
 import Carousel from "@/components/Carousel.vue";
@@ -8,6 +8,7 @@ import ProductCard from "@/components/ProductCard.vue";
 import GuideLightBox from "@/components/GuideLightBox.vue";
 import MenuContainer from "@/components/MenuContainer.vue";
 import FilterComponent from "@/components/FilterComponent.vue";
+import CarouselView from "@/components/CarouselView.vue";
 
 const productStore = useProductsStore();
 
@@ -83,6 +84,9 @@ const scrollToProducts = () => {
 // Cambiar vista
 const changeView = (view) => {
     viewMode.value = view;
+    nextTick(() => {
+        scrollToProducts();
+    });
 };
 </script>
 
@@ -113,8 +117,9 @@ const changeView = (view) => {
 
             <!-- Contenedor para los productos en modo collage o grid -->
             <div v-if="filteredProducts.length" class="product" :class="{ collage: viewMode === 'collage' }">
-                <ProductCard v-for="product in filteredProducts" :key="product.id" :product="product"
-                    @open-lightbox="openLightbox" :viewMode="viewMode" />
+                <ProductCard v-if="viewMode !== 'carousel'" v-for="product in filteredProducts" :key="product.id"
+                    :product="product" @open-lightbox="openLightbox" :viewMode="viewMode" />
+                <CarouselView v-else :products="filteredProducts" />
             </div>
             <p v-else>Bitxiak ez dira topatu :( </p>
         </div>
@@ -166,12 +171,13 @@ main {
 .product-container {
     position: relative;
     width: 100%;
+    height: 100vh;
 }
 
 /* Contenedor para SearchBar y MenuContainer */
 .tools-menu-container {
     position: sticky;
-    top:0;
+    top: 0;
     z-index: 9;
     width: 100%;
     display: flex;
