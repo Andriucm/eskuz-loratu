@@ -17,17 +17,17 @@ const changeView = (view) => {
     <div class="menubar-container">
         <div class="menubar">
             <!-- Botón para la vista tipo imagen (carousel) -->
-            <button class="item" :class="{ active: props.viewMode === 'image' }" @click="changeView('image')">
+            <button class="item button-primary" :class="{ active: props.viewMode === 'image' }" @click="changeView('image')">
                 <i class="fa-solid fa-image"></i>
             </button>
 
             <!-- Botón para la vista tipo cuadrícula -->
-            <button class="item" :class="{ active: props.viewMode === 'collage' }" @click="changeView('collage')">
+            <button class="item button-primary" :class="{ active: props.viewMode === 'collage' }" @click="changeView('collage')">
                 <i class="fa-solid fa-table-cells"></i>
             </button>
 
             <!-- Botón para la vista tipo imágenes múltiples -->
-            <button class="item" :class="{ active: props.viewMode === 'gallery' }" @click="changeView('gallery')">
+            <button class="item button-primary" :class="{ active: props.viewMode === 'gallery' }" @click="changeView('gallery')">
                 <i class="fa-regular fa-images"></i>
             </button>
         </div>
@@ -51,18 +51,8 @@ const changeView = (view) => {
 
 /* Estilos de los botones */
 .item {
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 5px;
-    background-color: #e0e0e0;
-    color: #333;
-    font-size: 1.5rem;
-    /* Tamaño del icono */
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 /* Estilo para el botón activo */

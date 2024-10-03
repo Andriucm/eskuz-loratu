@@ -37,7 +37,6 @@ watch(() => props.visible, (newVal) => {
         document.body.style.overflow = ''; // Habilitar scroll
     }
 });
-
 // Limpiar estilos al desmontar el componente (si el lightbox queda abierto)
 onBeforeUnmount(() => {
     document.body.style.overflow = '';
@@ -53,7 +52,9 @@ onBeforeUnmount(() => {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     /* Fondo oscuro */
     display: flex;
     justify-content: center;

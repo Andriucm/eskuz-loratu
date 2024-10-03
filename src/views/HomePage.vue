@@ -1,13 +1,13 @@
 <script setup>
-import { ref, onMounted, computed } from 'vue';
-import { useProductsStore } from '@/stores/products';
-import Loader from '@/components/Loader.vue';
-import Carousel from '@/components/Carousel.vue';
-import FAQButton from '@/components/FAQButton.vue';
-import ProductCard from '@/components/ProductCard.vue';
-import GuideLightBox from '@/components/GuideLightBox.vue';
-import MenuContainer from '@/components/MenuContainer.vue';
-import FilterComponent from '@/components/FilterComponent.vue';
+import { ref, onMounted, computed, watch } from "vue";
+import { useProductsStore } from "@/stores/products";
+import Loader from "@/components/Loader.vue";
+import Carousel from "@/components/Carousel.vue";
+import FAQButton from "@/components/FAQButton.vue";
+import ProductCard from "@/components/ProductCard.vue";
+import GuideLightBox from "@/components/GuideLightBox.vue";
+import MenuContainer from "@/components/MenuContainer.vue";
+import FilterComponent from "@/components/FilterComponent.vue";
 
 const productStore = useProductsStore();
 
@@ -23,12 +23,18 @@ const visible = ref(false);
 const selectedImage = ref('');
 const viewMode = ref('image');
 const sortOrder = ref('price-asc');
+const filteredProducts = ref([]); // Inicializar como array vacío
 const minPrice = ref(0);
-const maxPrice = ref(100);
+const maxPrice = ref(15);
 
 // Computed para filtrar y ordenar productos automáticamente
-const filteredProducts = computed(() => {
-    let filtered = products.value;
+watch([products, minPrice, maxPrice, sortOrder], () => {
+    filterAndSortProducts();
+});
+
+// Filtrar y ordenar productos
+const filterAndSortProducts = () => {
+    let filtered = [...products.value]; // Crear copia de los productos
 
     // Filtrar por rango de precios
     filtered = filtered.filter(
@@ -43,10 +49,10 @@ const filteredProducts = computed(() => {
         if (sortOrder.value === 'date-desc') return new Date(b.createdAt) - new Date(a.createdAt);
     });
 
-    return filtered;
-});
+    filteredProducts.value = filtered; // Actualizar el valor de `filteredProducts`
+};
 
-// Funciones para manejar los eventos emitidos por el componente de filtro
+// Funciones para manejar los eventos emitidos por FilterComponent
 const handleOrderChange = (order) => {
     sortOrder.value = order;
 };
@@ -80,7 +86,6 @@ const changeView = (view) => {
 };
 </script>
 
-
 <template>
     <main>
         <FAQButton />
@@ -102,7 +107,8 @@ const changeView = (view) => {
         <div v-else-if="products.length" class="product-container" id="product-container">
             <div class="tools-menu-container">
                 <MenuContainer @changeView="changeView" :viewMode="viewMode" />
-                <FilterComponent @order-change="handleOrderChange" @price-filter="handlePriceFilter" />
+                <FilterComponent @order-change="handleOrderChange" @price-filter="handlePriceFilter"
+                    :initialOrder="sortOrder" :initialMinPrice="minPrice" :initialMaxPrice="maxPrice" />
             </div>
 
             <!-- Contenedor para los productos en modo collage o grid -->
@@ -111,7 +117,6 @@ const changeView = (view) => {
                     @open-lightbox="openLightbox" :viewMode="viewMode" />
             </div>
             <p v-else>Bitxiak ez dira topatu :( </p>
-
         </div>
 
         <p v-else>Bitxiak ez dira topatu :( </p>
@@ -147,6 +152,7 @@ main {
     font-size: 3rem;
     font-weight: bold;
     letter-spacing: 0.05em;
+    margin-bottom: 1rem;
 }
 
 .product-header span {
@@ -160,19 +166,21 @@ main {
 .product-container {
     position: relative;
     width: 100%;
-    padding: 2rem;
 }
 
 /* Contenedor para SearchBar y MenuContainer */
 .tools-menu-container {
+    position: sticky;
+    top:0;
+    z-index: 9;
     width: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 2rem;
     margin-bottom: 2rem;
     gap: 2rem;
     background: rgba(245, 245, 245, 0.5);
+    backdrop-filter: blur(3px);
     border-radius: 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -188,6 +196,7 @@ main {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    padding: 2rem;
     transition: all 0.5s ease-in-out;
 }
 

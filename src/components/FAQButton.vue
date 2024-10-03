@@ -111,7 +111,7 @@ onMounted(() => {
     padding: 1rem 2rem;
     border-radius: 5px;
     display: flex;
-    width: 18rem;
+    width: 20rem;
     align-items: center;
     justify-content: center;
     transition-duration: 0.2s;
@@ -119,6 +119,7 @@ onMounted(() => {
     letter-spacing: 0.5px;
     flex-direction: column;
     gap: 1rem;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.151);
 
     h3 {
         font-weight: var(--font-weight-bold);
@@ -137,7 +138,7 @@ onMounted(() => {
 }
 
 .faq-button-selected {
-    right: 10rem;
+    right: 50%;
     transform: translate(50%, 0);
     transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 }

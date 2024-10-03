@@ -33,11 +33,13 @@ const selectedImage = ref('');
 const openLightbox = (image) => {
     selectedImage.value = image;
     visible.value = true;
+    document.body.style.overflow = 'hidden';
 };
 
 // Cerrar el lightbox
 const closeLightbox = () => {
     visible.value = false;
+    document.body.style.overflow = '';
 };
 
 

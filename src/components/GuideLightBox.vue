@@ -54,7 +54,9 @@ onBeforeUnmount(() => {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,18 +65,19 @@ onBeforeUnmount(() => {
 .lightbox-content {
 
     background-color: white;
-    padding: 1rem 2rem ;
+    padding: 1rem 2rem;
     border-radius: 5px;
     max-width: 95%;
     max-height: 100%;
     box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
     border: 5px solid var(--color-blanco);
 
-    h3{
+    h3 {
         text-align: center;
     }
 }
-.lightbox-content ol li{
+
+.lightbox-content ol li {
     font-size: 1.4rem;
     list-style-type: decimal;
 }
