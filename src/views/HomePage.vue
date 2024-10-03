@@ -9,6 +9,8 @@ import GuideLightBox from "@/components/GuideLightBox.vue";
 import MenuContainer from "@/components/MenuContainer.vue";
 import FilterComponent from "@/components/FilterComponent.vue";
 import CarouselView from "@/components/CarouselView.vue";
+import { Separator } from '@/components/ui/separator'
+
 
 const productStore = useProductsStore();
 
@@ -111,6 +113,7 @@ const changeView = (view) => {
         <div v-else-if="products.length" class="product-container" id="product-container">
             <div class="tools-menu-container">
                 <MenuContainer @changeView="changeView" :viewMode="viewMode" />
+                <Separator orientation="vertical" class="h-full border-l border-gray-300 mx-4" />
                 <FilterComponent @order-change="handleOrderChange" @price-filter="handlePriceFilter"
                     :initialOrder="sortOrder" :initialMinPrice="minPrice" :initialMaxPrice="maxPrice" />
             </div>
@@ -181,7 +184,9 @@ main {
     z-index: 9;
     width: 100%;
     display: flex;
+    height: 100px;
     align-items: center;
+    justify-content: space-between;
     padding: 2rem;
     margin-bottom: 2rem;
     gap: 2rem;
