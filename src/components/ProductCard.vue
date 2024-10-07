@@ -36,20 +36,18 @@ const redirectTo = (link: string) => {
     window.open(link, '_blank')
 }
 
-const username = ref('')
 </script>
 
 <template>
     <!-- Sheet container -->
-    <Sheet class="sheet"
-        <!-- Trigger: El propio ProductCard actúa como trigger para el Sheet -->
-        <SheetTrigger as-child>
-            <div class="product-card ">
-                <img :src="product.image" :alt="product.name" class="product-image " />
-                <div class="product-info ">
-                    <h2>{{ product.name }}</h2>
-                </div>
+    <Sheet>
+    <SheetTrigger as-child>
+        <div class="product-card ">
+            <img :src="product.image" :alt="product.name" class="product-image " />
+            <div class="product-info ">
+                <h2>{{ product.name }}</h2>
             </div>
+        </div>
         </SheetTrigger>
 
         <!-- Contenido del Sheet que aparecerá desde la parte inferior -->

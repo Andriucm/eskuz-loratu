@@ -29,7 +29,7 @@ const currentYear = new Date().getFullYear();
 }
 
 .footer-content {
-    width: 90%;
+    width: 95%;
     max-width: 1200px;
     margin: 0 auto;
     display: flex;

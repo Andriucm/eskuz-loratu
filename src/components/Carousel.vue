@@ -46,7 +46,7 @@ const closeLightbox = () => {
 </script>
 
 <template>
-    <div class="carousel">
+    <div class="container">
 
         <Carousel @mouseenter="autoPlay.stop" class="relative w-full" :opts="{
             align: 'start',
@@ -75,8 +75,3 @@ const closeLightbox = () => {
 
 </template>
 
-<style scoped>
-.carousel {
-    width: 100%;
-}
-</style>

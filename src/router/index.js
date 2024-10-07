@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "../views/HomePage.vue";
-import { useAuth } from "@/services/authFirebase";
+import { useAuth } from "@/services/authFirebase.js";
 import { useAuthStore } from "@/stores/auth";
 const { observeAuthState } = useAuth();
 

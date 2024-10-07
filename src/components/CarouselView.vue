@@ -1,6 +1,19 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { watchOnce } from '@vueuse/core'
+import { formatCurrency } from '@/utils';
+import { Button } from '@/components/ui/button'
+
+import {
+    Sheet,
+    SheetClose,
+    SheetContent,
+    SheetDescription,
+    SheetFooter,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from '@/components/ui/sheet'
 
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { Card, CardContent } from '@/components/ui/card'
@@ -11,6 +24,16 @@ const props = defineProps({
         required: true
     }
 });
+
+const emit = defineEmits(['open-lightbox'])
+
+const openLightbox = (image: string) => {
+    emit('open-lightbox', image)
+}
+
+const redirectTo = (link: string) => {
+    window.open(link, '_blank')
+}
 
 const emblaMainApi = ref()
 const emblaThumbnailApi = ref()
@@ -47,8 +70,47 @@ watchOnce(emblaMainApi, (emblaMainApi) => {
                     <div class="p-1">
                         <Card>
                             <CardContent class="flex aspect-[4/5]  justify-center p-0 rounded-[5px]">
-                                <img class="aspect-[4/5] rounded-[5px]" :src="product.image"
-                                    :alt="`Imagen de ${product.name}`">
+                                <Sheet>
+                                    <SheetTrigger as-child>
+                                        <img class="aspect-[4/5] rounded-[5px] object-cover" :src="product.image"
+                                            :alt="`Imagen de ${product.name}`">
+                                    </SheetTrigger>
+                                    <SheetContent side="bottom"
+                                        class="sheet-content bg-[var(--color-blanco)] rounded-t-lg p-6">
+                                        <SheetHeader>
+                                            <SheetTitle class="sheet-title ">{{ product.name }}
+                                            </SheetTitle>
+                                            <SheetDescription class="sheet-description  mt-2 mb-4">
+                                                {{ formatCurrency(product.price) }}
+                                            </SheetDescription>
+                                        </SheetHeader>
+
+                                        <!-- Opciones dentro del Sheet -->
+                                        <SheetClose as-child>
+                                            <div class="grid gap-4 py-4">
+                                                <div @click="openLightbox(product.image)"
+                                                    class="toolbar-option flex justify-between items-center p-2 bg-[var(--color-blanco)] text-[var(--color-texto)] border-b border-[var(--color-gris-claro)] cursor-pointer transition-colors duration-300 hover:bg-[var(--color-gris-claro)]">
+                                                    <span>Irudia Ikusi</span>
+                                                    <i class="fa-solid fa-maximize"></i>
+                                                </div>
+                                                <div @click="redirectTo(product.link)"
+                                                    class="toolbar-option flex justify-between items-center p-2 bg-[var(--color-blanco)] text-[var(--color-texto)] border-b border-[var(--color-gris-claro)] cursor-pointer transition-colors duration-300 hover:bg-[var(--color-gris-claro)]">
+                                                    <span>Irudira eraman</span>
+                                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                                </div>
+                                            </div>
+                                        </SheetClose>
+
+                                        <!-- Footer con el botón de cierre -->
+                                        <SheetFooter class="flex mt-4">
+                                            <SheetClose as-child>
+                                                <Button class="button-primary">
+                                                    Sarratu
+                                                </Button>
+                                            </SheetClose>
+                                        </SheetFooter>
+                                    </SheetContent>
+                                </Sheet>
                             </CardContent>
                         </Card>
                     </div>

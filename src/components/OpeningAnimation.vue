@@ -5,13 +5,13 @@
         <div class="door right-door"></div>
 
         <!-- Contenido de Texto sobre las puertas -->
-        <div class="text-content">
-            <h1>
+        <div class="text-content container">
+            <h2>
                 <a href="https://www.instagram.com/eskuz_loratu/" target="_blank" aria-label="Instagram">
                     @ESKUZ_LORATU
                 </a>
-            </h1>
-            <h1>Ongi Etorri</h1>
+            </h2>
+            <h2>Ongi Etorri</h2>
         </div>
     </div>
 </template>
@@ -107,18 +107,18 @@ onUnmounted(() => {
     /* Inicia después de que las puertas empiezan a abrirse */
 }
 
-.text-content h1 {
+.text-content h2 {
     font-family: var(--font-family-primary);
     color: var(--color-gris-oscuro, #333);
     margin: 0.5rem 0;
 }
 
-.text-content h1 a {
+.text-content h2 a {
     color: inherit;
     text-decoration: none;
 }
 
-.text-content h1 a:hover {
+.text-content h2 a:hover {
     text-decoration: underline;
 }
 

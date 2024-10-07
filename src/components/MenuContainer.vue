@@ -39,8 +39,7 @@ const changeView = (view) => {
 
 <style scoped>
 .menubar-container {
-    width: 100%;
-    padding: 1rem;
+    width:fit-content;
 }
 
 .menubar {

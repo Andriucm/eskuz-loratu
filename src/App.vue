@@ -4,6 +4,8 @@ import { RouterView } from 'vue-router';
 import Header from './components/Header.vue';
 import Footer from '@/components/Footer.vue';
 import OpeningAnimation from '@/components/OpeningAnimation.vue';
+// import NotificationsConsent from '@/components/NotificationsConsent.vue';
+
 
 
 import { usePWA } from '@/composables/usePWA';
@@ -22,4 +24,5 @@ provide('isIOS', isIOS);
     <RouterView />
     <Footer />
     <OpeningAnimation />
+    <!-- <NotificationsConsent /> -->
 </template>

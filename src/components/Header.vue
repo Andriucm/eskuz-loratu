@@ -16,7 +16,7 @@ const authStore = useAuthStore();
 </script>
 <template>
     <header class="mobile-header">
-        <div class="header-content">
+        <div class="header-content container">
             <RouterLink :to="{ name: 'home' }">
                 <div class="logo">
                     <!-- Puedes reemplazar el texto por una imagen si tienes un logo gráfico -->
@@ -48,7 +48,7 @@ const authStore = useAuthStore();
 /* Header móvil */
 .mobile-header {
     background-color: var(--color-fondo);
-    padding: 10px 20px;
+    padding: 10px 0px;
     border-bottom: 2px solid var(--color-gris-claro);
 }
 

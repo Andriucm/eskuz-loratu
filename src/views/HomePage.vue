@@ -69,10 +69,13 @@ const handlePriceFilter = ({ minPrice: newMin, maxPrice: newMax }) => {
 const openLightbox = (image) => {
     selectedImage.value = image;
     visible.value = true;
+    document.body.style.overflow = 'hidden';
 };
 
 const closeLightbox = () => {
     visible.value = false;
+    document.body.style.overflow = '';
+
 };
 
 // Función para hacer scroll a los productos
@@ -96,7 +99,7 @@ const changeView = (view) => {
     <main>
         <FAQButton />
         <div class="product-header">
-            <div>
+            <div class="container">
                 <h3>Eskuz egindako bitxiak, loreen edertasuna zurekin daramazu.</h3>
                 <span>"Eskuz Loratu bitxi marka artisau-lana eta naturaren inspirazioa uztartzen ditu. Loreen edertasuna
                     eta artisautzaren xarma pieza bakar bihurtzen ditugu, zure esentzia islatzeko. Eskuz egindako bitxi
@@ -111,18 +114,20 @@ const changeView = (view) => {
 
         <!-- Contenedor para SearchBar y MenuContainer -->
         <div v-else-if="products.length" class="product-container" id="product-container">
-            <div class="tools-menu-container">
-                <MenuContainer @changeView="changeView" :viewMode="viewMode" />
-                <Separator orientation="vertical" class="h-full border-l border-gray-300 mx-4" />
-                <FilterComponent @order-change="handleOrderChange" @price-filter="handlePriceFilter"
-                    :initialOrder="sortOrder" :initialMinPrice="minPrice" :initialMaxPrice="maxPrice" />
+            <div class="tools-menu">
+                <div class="container tool-menu-container">
+                    <MenuContainer @changeView="changeView" :viewMode="viewMode" />
+                    <Separator orientation="vertical" class="h-full border-l border-gray-300 mx-4" />
+                    <FilterComponent @order-change="handleOrderChange" @price-filter="handlePriceFilter"
+                        :initialOrder="sortOrder" :initialMinPrice="minPrice" :initialMaxPrice="maxPrice" />
+                </div>
             </div>
 
             <!-- Contenedor para los productos en modo collage o grid -->
-            <div v-if="filteredProducts.length" class="product" :class="{ collage: viewMode === 'collage' }">
+            <div v-if="filteredProducts.length" class="product container" :class="{ collage: viewMode === 'collage' }">
                 <ProductCard v-if="viewMode !== 'carousel'" v-for="product in filteredProducts" :key="product.id"
                     :product="product" @open-lightbox="openLightbox" :viewMode="viewMode" />
-                <CarouselView v-else :products="filteredProducts" />
+                <CarouselView v-else :products="filteredProducts" @open-lightbox="openLightbox" />
             </div>
             <p v-else>Bitxiak ez dira topatu :( </p>
         </div>
@@ -149,7 +154,7 @@ main {
     justify-content: center;
     text-align: center;
     background: rgba(245, 245, 245, 0.5);
-    padding: 2rem;
+    padding: 2rem 0;
     margin-bottom: 3rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     gap: 3rem;
@@ -178,22 +183,26 @@ main {
 }
 
 /* Contenedor para SearchBar y MenuContainer */
-.tools-menu-container {
+.tools-menu {
     position: sticky;
     top: 0;
     z-index: 9;
     width: 100%;
-    display: flex;
-    height: 100px;
-    align-items: center;
-    justify-content: space-between;
-    padding: 2rem;
+    padding: 2rem 0;
     margin-bottom: 2rem;
-    gap: 2rem;
     background: rgba(245, 245, 245, 0.5);
     backdrop-filter: blur(3px);
     border-radius: 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tool-menu-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 1rem;
+    height: 5rem;
+
 }
 
 .product.collage {
@@ -207,7 +216,7 @@ main {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 2rem;
+    padding: 2rem 0;
     transition: all 0.5s ease-in-out;
 }
 

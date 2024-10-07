@@ -45,7 +45,7 @@ const applyFilters = () => {
     <Sheet>
         <!-- Trigger para abrir el filtro -->
         <SheetTrigger>
-            <Button class="button-primary">Filtros</Button>
+            <button class="button-primary"><i class="fa-solid fa-filter"></i></Button>
         </SheetTrigger>
 
         <!-- Contenido del Sheet -->
@@ -64,7 +64,7 @@ const applyFilters = () => {
                     <option value="date-desc">Fecha de Creación Descendente</option>
                 </select>
             </div>
-            <Separator class="my-8"  />
+            <Separator class="my-8" />
             <!-- Rango de precios -->
             <div class="filter-group">
                 <label for="min-price">Precio Mínimo:</label>
@@ -95,7 +95,9 @@ const applyFilters = () => {
     flex-direction: column;
     margin-bottom: 1rem;
 }
-
+.button-primary{
+    padding:1rem;
+}
 label {
     font-family: var(--font-family-secondary);
     font-size: var(--font-size-p);

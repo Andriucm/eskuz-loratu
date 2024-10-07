@@ -1,131 +1,136 @@
 /* Importación de fuentes */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 :root {
-  /* Colores */
-  --color-turquesa: rgb(64, 224, 208);
-  --color-actions:#E4405F;
-  --color-fondo: rgb(232, 248, 246);
-  --color-blanco: rgb(255, 255, 255);
-  --color-gris-oscuro: rgb(51, 51, 51);
-  --color-gris-claro: rgb(245, 245, 245);
-  --color-oro-metalico: rgb(212, 175, 55);
-  --color-gris-medio: rgb(102, 102, 102);
+	/* Colores */
+	--color-turquesa: rgb(64, 224, 208);
+	--color-actions: #e4405f;
+	--color-fondo: rgb(232, 248, 246);
+	--color-blanco: rgb(255, 255, 255);
+	--color-gris-oscuro: rgb(51, 51, 51);
+	--color-gris-claro: rgb(245, 245, 245);
+	--color-oro-metalico: rgb(212, 175, 55);
+	--color-gris-medio: rgb(102, 102, 102);
 
-  /* Tipografía */
-  --font-family-primary: 'Poppins', sans-serif;
-  --font-family-secondary: 'Montserrat', sans-serif;
+	/* Tipografía */
+	--font-family-primary: "Poppins", sans-serif;
+	--font-family-secondary: "Montserrat", sans-serif;
 
-  /* Tamaños de fuente */
-  --font-size-h1: 40px;
-  --font-size-h2: 32px;
-  --font-size-h3: 24px;
-  --font-size-p: 16px;
+	/* Tamaños de fuente */
+	--font-size-h1: 40px;
+	--font-size-h2: 32px;
+	--font-size-h3: 24px;
+	--font-size-p: 16px;
 
-  /* Pesos de fuente */
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-semi-bold: 600;
-  --font-weight-bold: 700;
+	/* Pesos de fuente */
+	--font-weight-regular: 400;
+	--font-weight-medium: 500;
+	--font-weight-semi-bold: 600;
+	--font-weight-bold: 700;
 }
 
 /* Reset y estilos globales */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 /* Asegurar que el body tome el 100% del alto */
 html,
 body,
 #app {
-  height: 100%;
+	height: 100%;
+	width: 100%;
+    margin:0 auto;
 }
 
 /* Estilos generales del cuerpo */
 body {
-  font-family: var(--font-family-secondary);
-  color: var(--color-gris-oscuro);
-  background-image: url('../svg/main-background.svg');
-
+	font-family: var(--font-family-secondary);
+	color: var(--color-gris-oscuro);
+	background-image: url("../svg/main-background.svg");
 }
 
 main {
-    max-width: 1200px;
-    min-height: 100vh;
-    margin: 0 auto;
-    text-align: left;
-    background-color: transparent;
+	max-width: 1200px;
+	min-height: 100vh;
+	margin: 0 auto;
+	text-align: left;
+	background-color: transparent;
 }
+
+.container{
+    max-width: 1200%;
+    width: 95%;
+    margin:0 auto;
+    padding-inline: 0;
+
+}
+
 /* Enlaces */
 a {
-  text-decoration: none;
-  color: var(--color-turquesa);
-  font-weight: var(--font-weight-medium);
-  transition: color 0.3s ease-in-out;
-  
+	text-decoration: none;
+	color: var(--color-turquesa);
+	font-weight: var(--font-weight-medium);
+	transition: color 0.3s ease-in-out;
 }
 
 a:hover {
-    color: var(--color-oro-metalico);
-  transition: color 0.3s ease-in-out;
-
+	color: var(--color-oro-metalico);
+	transition: color 0.3s ease-in-out;
 }
 
 /* Estilos globales para botones */
 button {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  font-family: inherit;
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	font-family: inherit;
 }
 
 /* Botones primarios */
 .button-primary {
-  background-color: var(--color-actions);
-  color: var(--color-blanco);
-  font-family: var(--font-family-secondary);
-  font-size: var(--font-size-p);
-  font-weight: var(--font-weight-medium);
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-    border-radius: 5px;
-
+	background-color: var(--color-actions);
+	color: var(--color-blanco);
+	font-family: var(--font-family-secondary);
+	font-size: var(--font-size-p);
+	font-weight: var(--font-weight-medium);
+	border: none;
+	padding: 10px 20px;
+	cursor: pointer;
+	transition: background-color 0.3s ease-in-out;
+	border-radius: 5px;
 }
 
 .button-primary:hover {
-  background-color: var(--color-oro-metalico);
+	background-color: var(--color-oro-metalico);
 }
 
 /* Botones secundarios */
 .button-secondary {
-  background-color: transparent;
-  color: var(--color-actions);
-  font-family: var(--font-family-secondary);
-  font-size: var(--font-size-p);
-  font-weight: var(--font-weight-medium);
-  border: 2px solid var(--color-actions);
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out;
-    border-radius: 5px;
-
+	background-color: transparent;
+	color: var(--color-actions);
+	font-family: var(--font-family-secondary);
+	font-size: var(--font-size-p);
+	font-weight: var(--font-weight-medium);
+	border: 2px solid var(--color-actions);
+	padding: 10px 20px;
+	cursor: pointer;
+	transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+	border-radius: 5px;
 }
 
 .button-secondary:hover {
-  color: var(--color-oro-metalico);
-  border-color: var(--color-oro-metalico);
+	color: var(--color-oro-metalico);
+	border-color: var(--color-oro-metalico);
 }
 
 /* Listas */
 ul,
 ol {
-  list-style: none;
+	list-style: none;
 }
 
 /* Títulos y encabezados */
@@ -135,104 +140,95 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: normal;
-  margin: 0;
-  color: var(--color-gris-oscuro);
-   user-select: none; /* Desactivar selección de texto */
-      -webkit-user-select: none; /* Safari, Chrome */
-      -moz-user-select: none; /* Firefox */
-      -ms-user-select: none; /* Internet Explorer/Edge */
+	font-weight: normal;
+	margin: 0;
+	color: var(--color-gris-oscuro);
+	user-select: none; /* Desactivar selección de texto */
+	-webkit-user-select: none; /* Safari, Chrome */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
 }
 
 h1 {
-  font-family: var(--font-family-primary);
-  font-size: var(--font-size-h1);
-  font-weight: var(--font-weight-bold);
+	font-family: var(--font-family-primary);
+	font-size: var(--font-size-h1);
+	font-weight: var(--font-weight-bold);
 }
 
 h2 {
-  font-family: var(--font-family-primary);
-  font-size: var(--font-size-h2);
-  font-weight: var(--font-weight-semi-bold);
+	font-family: var(--font-family-primary);
+	font-size: var(--font-size-h2);
+	font-weight: var(--font-weight-semi-bold);
 }
 
 h3 {
-  font-family: var(--font-family-primary);
-  font-size: var(--font-size-h3);
-  font-weight: var(--font-weight-regular);
+	font-family: var(--font-family-primary);
+	font-size: var(--font-size-h3);
+	font-weight: var(--font-weight-regular);
 }
 
 /* Párrafos */
 p {
-  font-family: var(--font-family-secondary);
-  font-size: var(--font-size-p);
-  font-weight: var(--font-weight-regular);
-  color: var(--color-gris-oscuro);
-   user-select: none; /* Desactivar selección de texto */
-      -webkit-user-select: none; /* Safari, Chrome */
-      -moz-user-select: none; /* Firefox */
-      -ms-user-select: none; /* Internet Explorer/Edge */
+	font-family: var(--font-family-secondary);
+	font-size: var(--font-size-p);
+	font-weight: var(--font-weight-regular);
+	color: var(--color-gris-oscuro);
+	user-select: none; /* Desactivar selección de texto */
+	-webkit-user-select: none; /* Safari, Chrome */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
 }
 
 /* Formularios y entradas */
 input,
 textarea,
 select {
-  font-family: var(--font-family-secondary);
-  font-size: var(--font-size-p);
-  color: var(--color-gris-oscuro);
-  border: 1px solid var(--color-gris-medio);
-  padding: 10px;
-  width: 100%;
-  box-sizing: border-box;
+	font-family: var(--font-family-secondary);
+	font-size: var(--font-size-p);
+	color: var(--color-gris-oscuro);
+	border: 1px solid var(--color-gris-medio);
+	padding: 10px;
+	width: 100%;
+	box-sizing: border-box;
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: var(--color-gris-medio);
+	color: var(--color-gris-medio);
 }
 
 label {
-  font-family: var(--font-family-secondary);
-  font-size: 14px;
-  color: var(--color-gris-oscuro);
-  margin-bottom: 5px;
-  display: block;
-   user-select: none; /* Desactivar selección de texto */
-      -webkit-user-select: none; /* Safari, Chrome */
-      -moz-user-select: none; /* Firefox */
-      -ms-user-select: none; /* Internet Explorer/Edge */
-}
-
-
-/* Contenedor principal */
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-top: 80px; /* Espacio para la barra de navegación fija */
+	font-family: var(--font-family-secondary);
+	font-size: 14px;
+	color: var(--color-gris-oscuro);
+	margin-bottom: 5px;
+	display: block;
+	user-select: none; /* Desactivar selección de texto */
+	-webkit-user-select: none; /* Safari, Chrome */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
 }
 
 /* Iconos */
 .icon {
-  fill: var(--color-gris-oscuro);
-  transition: fill 0.3s ease-in-out;
+	fill: var(--color-gris-oscuro);
+	transition: fill 0.3s ease-in-out;
 }
 
 .icon:hover {
-  fill: var(--color-turquesa);
+	fill: var(--color-turquesa);
 }
 
 /* Áreas privadas */
 .private-area {
-  background-color: var(--color-gris-claro);
-  padding: 20px;
-  border-radius: 5px;
+	background-color: var(--color-gris-claro);
+	padding: 20px;
+	border-radius: 5px;
 }
 
 /* Accesibilidad */
 @media (prefers-reduced-motion: reduce) {
-  * {
-    transition: none;
-  }
+	* {
+		transition: none;
+	}
 }

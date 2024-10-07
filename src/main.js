@@ -14,7 +14,7 @@ import Lightbox from "@/components/Lightbox.vue";
 
 //Firebase
 import { VueFire, VueFireAuth } from "vuefire";
-import { firebaseApp } from "@/config/firebase";
+import { firebaseApp } from "@/config/firebase.js";
 
 
 const app = createApp(App);
