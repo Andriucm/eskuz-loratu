@@ -135,3 +135,31 @@ watchOnce(emblaMainApi, (emblaMainApi) => {
         </Carousel>
     </div>
 </template>
+<style scoped>
+.toolbar-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 0.5rem 1rem;
+    color: var(--color-texto);
+    font-weight: var(--font-weight-medium);
+    font-size: var(--font-size-p);
+    cursor: pointer;
+    border-bottom: 1px solid var(--color-gris-claro);
+    transition: background-color 0.3s ease;
+}
+
+.toolbar-option:hover {
+    background-color: var(--color-gris-claro);
+}
+.sheet-title {
+    background-color: var(--color-blanco);
+    font-size: var(--font-size-h3)
+}
+
+.sheet-description {
+    font-size: var(--font-size-p);
+    color: var(--color-gris-oscuro);
+}
+</style>
