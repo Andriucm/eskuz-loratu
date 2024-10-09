@@ -214,7 +214,7 @@ main {
 .product-container {
     position: relative;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 /* Contenedor para SearchBar y MenuContainer */
@@ -226,7 +226,6 @@ main {
     padding: 2rem 0;
     background: rgba(245, 245, 245, 0.5);
     backdrop-filter: blur(3px);
-    border-radius: 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -234,7 +233,6 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    gap: 1rem;
     height: 5rem;
 
 }
@@ -250,7 +248,7 @@ main {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 2rem 0;
+    padding:  0;
     transition: all 0.5s ease-in-out;
 }
 
