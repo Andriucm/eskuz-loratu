@@ -26,12 +26,13 @@ const visible = ref(false);
 const selectedImage = ref('');
 const viewMode = ref('image');
 const sortOrder = ref('price-asc');
-const filteredProducts = ref([]); // Inicializar como array vacío
+const filteredProducts = ref([]); 
+const categoryFilter = ref([])
 const minPrice = ref(0);
 const maxPrice = ref(15);
 
 // Computed para filtrar y ordenar productos automáticamente
-watch([products, minPrice, maxPrice, sortOrder], () => {
+watch([products, minPrice, maxPrice, sortOrder, categoryFilter], () => {
     filterAndSortProducts();
 });
 
@@ -44,6 +45,11 @@ const filterAndSortProducts = () => {
         (product) => product.price >= minPrice.value && product.price <= maxPrice.value
     );
 
+    // Filtrar por categorías
+    if (categoryFilter.value.length > 0) {
+        filtered = filtered.filter((product) => categoryFilter.value.includes(product.category));
+    }
+
     // Ordenar según el criterio seleccionado
     filtered.sort((a, b) => {
         if (sortOrder.value === 'price-asc') return a.price - b.price;
@@ -52,7 +58,7 @@ const filterAndSortProducts = () => {
         if (sortOrder.value === 'date-desc') return new Date(b.createdAt) - new Date(a.createdAt);
     });
 
-    filteredProducts.value = filtered; // Actualizar el valor de `filteredProducts`
+    filteredProducts.value = filtered; 
 };
 
 // Funciones para manejar los eventos emitidos por FilterComponent
@@ -64,6 +70,16 @@ const handlePriceFilter = ({ minPrice: newMin, maxPrice: newMax }) => {
     minPrice.value = newMin;
     maxPrice.value = newMax;
 };
+
+const handleCategoryFilter = (category) => {
+    categoryFilter.value = category;
+}
+
+const resetFilters = () => { 
+    minPrice.value = 0;
+    maxPrice.value = 15;
+    categoryFilter.value = [];
+}
 
 // Abrir y cerrar Lightbox
 const openLightbox = (image) => {
@@ -100,7 +116,7 @@ const changeView = (view) => {
         <FAQButton />
         <div class="product-header">
             <div class="container">
-                <h3>Eskuz egindako bitxiak, loreen edertasuna zurekin daramazu.</h3>
+                <h3>¡Eskuz egindako bitxiak!</h3>
                 <span>"Eskuz Loratu bitxi marka artisau-lana eta naturaren inspirazioa uztartzen ditu. Loreen edertasuna
                     eta artisautzaren xarma pieza bakar bihurtzen ditugu, zure esentzia islatzeko. Eskuz egindako bitxi
                     bakoitza maitasunez eta dedikazioz sortzen dugu, emozioak transmitituz eta edertasun unibertsala
@@ -118,8 +134,8 @@ const changeView = (view) => {
                 <div class="container tool-menu-container">
                     <MenuContainer @changeView="changeView" :viewMode="viewMode" />
                     <Separator orientation="vertical" class="h-full border-l border-gray-300 mx-4" />
-                    <FilterComponent @order-change="handleOrderChange" @price-filter="handlePriceFilter"
-                        :initialOrder="sortOrder" :initialMinPrice="minPrice" :initialMaxPrice="maxPrice" />
+                    <FilterComponent @order-change="handleOrderChange" @price-filter="handlePriceFilter" @category-filter="handleCategoryFilter" @reset-filters="resetFilters"
+                        :initialOrder="sortOrder" :initialMinPrice="minPrice" :initialMaxPrice="maxPrice" :initialCategory="categoryFilter" />
                 </div>
             </div>
 

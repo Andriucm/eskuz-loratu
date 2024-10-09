@@ -127,8 +127,7 @@ onMounted(() => {
 }
 
 .tooltip-description {
-    color: var(--color-turquesa);
-    font-size: var(--font-size-p);
+    color: var(--color-gris-medio);
 }
 
 .faq-button-selected-tooltip {

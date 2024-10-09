@@ -20,6 +20,7 @@ const formData = reactive({
     description: "",
     link: "",
     image: null,
+    category: 0
 });
 
 const successMessage = ref("");
@@ -45,6 +46,10 @@ const validateForm = () => {
         errorMessage.value = "El precio debe ser mayor que 0.";
         return false;
     }
+    if (!formData.category || formData.category === 0) {
+        errorMessage.value = "Selecciona una categoria para la joya"
+    }
+
     if (!formData.description) {
         errorMessage.value = "La descripción es obligatoria.";
         return false;
@@ -87,7 +92,7 @@ const submitForm = async () => {
 
         const { image, ...values } = formData;
         // Añadir la fecha de creación
-        values.createdAt = new Date().toISOString(); 
+        values.createdAt = new Date().toISOString();
 
         try {
             await productStore.createProduct({ ...values, image: url.value });
@@ -108,6 +113,7 @@ const resetForm = () => {
     formData.link = "";
     formData.image = null;
     url.value = null;
+    formData.value = 0;
 };
 </script>
 
@@ -127,6 +133,17 @@ const resetForm = () => {
             <div class="form-group">
                 <label for="price">Precio:</label>
                 <input type="number" id="price" v-model="formData.price" min="0" step="1" />
+            </div>
+
+            <div class="form-group">
+                <label for="category">Categoria:</label>
+                <select name="category" id="category" v-model="formData.category">
+                    <option value="0" disabled>Selecciona una categoria</option>
+                    <option value="1">Pendiente</option>
+                    <option value="2">Anillo</option>
+                    <option value="3">Pulsera</option>
+                    <option value="4">Collar</option>
+                </select>
             </div>
 
             <!-- Descripción de la joya -->
@@ -250,6 +267,7 @@ button.button-primary {
     font-size: 16px;
     font-weight: var(--font-weight-medium);
     border-radius: 5px;
+    width: 100%;
 }
 
 button.button-primary:disabled {

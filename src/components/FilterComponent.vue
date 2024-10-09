@@ -10,7 +10,7 @@ import {
     SheetTitle,
     SheetTrigger,
 } from '@/components/ui/sheet';
-import { Separator } from '@/components/ui/separator'
+import { Separator } from '@/components/ui/separator';
 
 // Props para valores iniciales (opcionales)
 const props = defineProps({
@@ -24,34 +24,54 @@ const props = defineProps({
     },
     initialMaxPrice: {
         type: Number,
-        default: 1000,
+        default: 15,
     },
+    initialCategory: {
+        type: Array,
+        default: () => []
+    }
 });
-const emit = defineEmits(['order-change', 'price-filter']);
+
+// Emitir eventos al componente padre
+const emit = defineEmits(['order-change', 'price-filter', 'category-filter','reset-filters']);
 
 // Variables reactivas para almacenar los filtros seleccionados
 const selectedOrder = ref(props.initialOrder);
 const minPrice = ref(props.initialMinPrice);
 const maxPrice = ref(props.initialMaxPrice);
+const categoryFilter = ref(props.initialCategory);
+
+const categories = [
+    { id: 1, name: 'Pendiente' },
+    { id: 2, name: 'Anillo' },
+    { id: 3, name: 'Pulsera' },
+    { id: 4, name: 'Collar' }
+];
 
 // Emitir eventos al componente padre al cerrar el Sheet
 const applyFilters = () => {
     emit('order-change', selectedOrder.value);
     emit('price-filter', { minPrice: minPrice.value, maxPrice: maxPrice.value });
+    emit('category-filter', categoryFilter.value); // Corrige aquí el typo
 };
+
+const resetFilters = () => {
+    emit('reset-filters');
+}
+
 </script>
 
 <template>
     <Sheet>
         <!-- Trigger para abrir el filtro -->
         <SheetTrigger>
-            <button class="button-primary"><i class="fa-solid fa-filter"></i></Button>
+            <button class="button-primary"><i class="fa-solid fa-filter"></i></button>
         </SheetTrigger>
 
         <!-- Contenido del Sheet -->
         <SheetContent side="right" class="w-full">
             <SheetHeader>
-                <SheetTitle class="text-5xl">Filtros</SheetTitle>
+                <SheetTitle class="text-3xl">Filtros</SheetTitle>
             </SheetHeader>
 
             <!-- Opciones de filtrado -->
@@ -64,7 +84,18 @@ const applyFilters = () => {
                     <option value="date-desc">Fecha de Creación Descendente</option>
                 </select>
             </div>
+
+            <div class="filter-group">
+                <label for="category">Categoría:</label>
+                <select id="category" v-model="categoryFilter" multiple>
+                    <option v-for="category in categories" :key="category.id" :value="category.id">
+                        {{ category.name }}
+                    </option>
+                </select>
+            </div>
+
             <Separator class="my-8" />
+
             <!-- Rango de precios -->
             <div class="filter-group">
                 <label for="min-price">Precio Mínimo:</label>
@@ -80,9 +111,14 @@ const applyFilters = () => {
             <SheetFooter class="flex mt-4">
                 <!-- Al hacer clic en "Cerrar" se aplican los filtros -->
                 <SheetClose as-child>
-                    <button class="button-primary" @click="applyFilters">
-                        Aplicar Filtros
-                    </button>
+                    <div class="button-group">
+                        <button class="button-primary apply" @click="applyFilters">
+                            Aplicar Filtros
+                        </button>
+                        <button class="button-primary reset" @click="resetFilters">
+                            <i class="fa-solid fa-rotate-left"></i>
+                        </button>
+                    </div>
                 </SheetClose>
             </SheetFooter>
         </SheetContent>
@@ -95,9 +131,33 @@ const applyFilters = () => {
     flex-direction: column;
     margin-bottom: 1rem;
 }
-.button-primary{
-    padding:1rem;
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
 }
+
+.button-primary {
+    padding: 1rem 2rem;
+}
+
+.apply {
+    flex-grow: 3;
+}
+.apply:active {
+    background-color: var(--color-oro-metalico);
+}
+
+.reset {
+    flex-grow: 1;
+    background-color: var(--color-gris-medio);
+}
+.reset:active {
+    background-color: var(--color-gris-oscuro);
+}
+
 label {
     font-family: var(--font-family-secondary);
     font-size: var(--font-size-p);
@@ -112,11 +172,22 @@ input[type='number'] {
     font-size: var(--font-size-p);
     border: 1px solid var(--color-gris-medio);
     border-radius: 5px;
+    background-color: var(--color-blanco);
+    transition: border-color 0.3s;
 }
 
 select:focus,
 input:focus {
     outline: none;
     border-color: var(--color-actions);
+}
+
+select option {
+    padding: 8px 12px;
+}
+
+select option:checked {
+    background-color: var(--color-actions);
+    color: white;
 }
 </style>
