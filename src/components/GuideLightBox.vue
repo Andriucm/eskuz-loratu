@@ -1,52 +1,60 @@
 <script setup>
 import { watch, onBeforeUnmount } from 'vue';
-import { useGuideStore } from '@/stores/guide'; // Importar el store de guía
+import { useGuideStore } from '@/stores/guide';
 
-// Accedemos al store
 const guideStore = useGuideStore();
 
-// Método para cerrar el lightbox
 const closeLightbox = () => {
-    guideStore.toggleGuide(); // Cambia el estado de `showGuide` en el store
+    guideStore.toggleGuide();
 };
 
-// Watch para detectar cuando el lightbox está visible y desactivar el scroll del body
 watch(
     () => guideStore.showGuide,
     (newVal) => {
         if (newVal) {
-            document.body.style.overflow = 'hidden'; // Deshabilitar scroll cuando el lightbox está visible
+            document.body.style.overflow = 'hidden';
         } else {
-            document.body.style.overflow = ''; // Restaurar el scroll cuando el lightbox se cierra
+            document.body.style.overflow = '';
         }
     }
 );
 
-// Limpiar estilos al desmontar el componente (si el lightbox queda abierto)
 onBeforeUnmount(() => {
-    document.body.style.overflow = ''; // Asegurar que el scroll se habilita de nuevo si el componente se desmonta
+    document.body.style.overflow = '';
 });
 </script>
 
-
 <template>
-    <!-- Lightbox personalizado para la guía -->
     <div v-if="guideStore.showGuide" class="lightbox" @click.self="closeLightbox">
         <span class="close" @click="closeLightbox">&times;</span>
-        <div class="lightbox-content">
-            <h3>Cómo agregar la PWA en iOS</h3>
-            <ol>
-                <li>Abre Safari y visita esta página.</li>
-                <li>Toca el ícono de compartir en la parte inferior de la pantalla.</li>
-                <li>Selecciona "Agregar a la pantalla de inicio".</li>
-                <li>Confirma el nombre y toca "Agregar".</li>
+        <div class="lightbox-content animate__animated animate__fadeInDown">
+            <h3 class="guide-title">Cómo agregar la PWA en iOS</h3>
+            <p class="guide-description">
+                Sigue estos sencillos pasos para agregar la aplicación a tu pantalla de inicio en iOS:
+            </p>
+            <ol class="guide-steps">
+                <li class="guide-step">
+                    <span class="step-number">1</span>
+                    <p>Abre Safari y visita esta página.</p>
+                </li>
+                <li class="guide-step">
+                    <span class="step-number">2</span>
+                    <p>Toca el ícono de <i class="fa-solid fa-share-nodes"></i> en la parte inferior de la pantalla.</p>
+                </li>
+                <li class="guide-step">
+                    <span class="step-number">3</span>
+                    <p>Selecciona <strong>"Agregar a la pantalla de inicio"</strong>.</p>
+                </li>
+                <li class="guide-step">
+                    <span class="step-number">4</span>
+                    <p>Confirma el nombre y toca <strong>"Agregar"</strong>.</p>
+                </li>
             </ol>
         </div>
     </div>
 </template>
 
 <style scoped>
-/* Lightbox personalizado */
 .lightbox {
     position: fixed;
     z-index: 999999;
@@ -54,45 +62,87 @@ onBeforeUnmount(() => {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .lightbox-content {
-
-    background-color: white;
+    background-color: #ffffff;
     padding: 1rem 2rem;
-    border-radius: 5px;
+    border-radius: 10px;
     max-width: 95%;
-    max-height: 100%;
-    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.2);
-    border: 5px solid var(--color-blanco);
-
-    h3 {
-        text-align: center;
-    }
+    max-height: 90%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow-y: auto;
 }
 
-.lightbox-content ol li {
-    font-size: 1.4rem;
-    list-style-type: decimal;
+.guide-title {
+    font-size: 2.4rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
+.guide-description {
+    color: #555;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.guide-steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.guide-step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.guide-step:hover {
+    transform: translateX(5px);
+}
+
+.step-number {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    background-color: var(--color-actions);
+    border-radius: 50%;
+    min-width: 35px;
+    min-height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+}
+
+.guide-step p {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: #333;
+}
+
+/* Botón de cierre */
 .close {
     position: absolute;
     top: 20px;
     right: 30px;
     font-size: 40px;
-    color: white;
+    color: #bbb;
     cursor: pointer;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .close:hover {
-    color: var(--color-oro-metalico);
+    color: #ff6f61;
+    transform: scale(1.1);
 }
 </style>
