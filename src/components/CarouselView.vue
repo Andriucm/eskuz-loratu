@@ -2,7 +2,6 @@
 import { ref } from 'vue'
 import { watchOnce } from '@vueuse/core'
 import { formatCurrency } from '@/utils';
-import { Button } from '@/components/ui/button'
 
 import {
     Sheet,
@@ -104,9 +103,9 @@ watchOnce(emblaMainApi, (emblaMainApi) => {
                                         <!-- Footer con el botón de cierre -->
                                         <SheetFooter class="flex mt-4">
                                             <SheetClose as-child>
-                                                <Button class="button-primary">
+                                                <button class="button-primary">
                                                     Sarratu
-                                                </Button>
+                                                </button>
                                             </SheetClose>
                                         </SheetFooter>
                                     </SheetContent>
@@ -124,8 +123,8 @@ watchOnce(emblaMainApi, (emblaMainApi) => {
                     class="pl-0 basis-1/4 cursor-pointer" @click="onThumbClick(index)">
                     <div class="p-1" :class="index === selectedIndex ? '' : 'opacity-50'">
                         <Card>
-                            <CardContent class="flex aspect-[4/5] items-center justify-center p-1 rounded-[5px]">
-                                <img class="aspect-[4/5] rounded-[5px]" :src="product.image"
+                            <CardContent class="flex aspect-[1/1] items-center justify-center p-1 rounded-[5px]">
+                                <img class="aspect-[1/1] rounded-[5px]" :src="product.image"
                                     :alt="`Imagen de ${product.name}`">
                             </CardContent>
                         </Card>

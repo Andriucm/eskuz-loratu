@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { formatCurrency } from '@/utils';
-import { Button } from '@/components/ui/button'
 
 import {
     Sheet,
@@ -41,13 +39,14 @@ const redirectTo = (link: string) => {
 <template>
     <!-- Sheet container -->
     <Sheet>
-    <SheetTrigger as-child>
-        <div class="product-card ">
-            <img :src="product.image" :alt="product.name" class="product-image " />
-            <div class="product-info ">
-                <h2>{{ product.name }}</h2>
+        <SheetTrigger as-child>
+            <div class="product-card ">
+                <img :src="product.image" :alt="product.name" class="product-image "
+                    :class="{ 'collage-view': viewMode === 'collage' }" />
+                <div class="product-info ">
+                    <h2 :class="{ hidden: viewMode === 'collage'}">{{ product.name }}</h2>
+                </div>
             </div>
-        </div>
         </SheetTrigger>
 
         <!-- Contenido del Sheet que aparecerá desde la parte inferior -->
@@ -79,9 +78,9 @@ const redirectTo = (link: string) => {
             <!-- Footer con el botón de cierre -->
             <SheetFooter class="flex mt-4">
                 <SheetClose as-child>
-                    <Button class="button-primary">
+                    <button class="button-primary">
                         Sarratu
-                    </Button>
+                    </button>
                 </SheetClose>
             </SheetFooter>
         </SheetContent>
@@ -156,5 +155,13 @@ const redirectTo = (link: string) => {
 .sheet-description {
     font-size: var(--font-size-p);
     color: var(--color-gris-oscuro);
+}
+
+.hidden{
+    display: none;
+}
+.collage-view{
+    margin:0;
+    aspect-ratio: 1 /1;
 }
 </style>

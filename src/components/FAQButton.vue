@@ -59,7 +59,7 @@ onMounted(() => {
     position: fixed;
     bottom: 2rem;
     right: 2rem;
-    z-index: 1;
+    z-index: 10;
     transition: all 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
 

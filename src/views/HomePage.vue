@@ -169,12 +169,31 @@ main {
     align-items: center;
     justify-content: center;
     text-align: center;
-    background: rgba(245, 245, 245, 0.5);
     padding: 2rem 0;
     margin-bottom: 3rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     gap: 3rem;
     height: calc(100vh - 4rem);
+    position: relative;
+    background-image: url("../assets/svg/main-background.svg");
+    background-position: center;
+}
+.product-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+        background: rgba(245, 245, 245, 0.3);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Asegúrate de que el contenido dentro de .product-header esté por encima del overlay */
+.product-header>* {
+    position: relative;
+    z-index: 2;
 }
 
 .product-header h3 {
@@ -205,7 +224,6 @@ main {
     z-index: 9;
     width: 100%;
     padding: 2rem 0;
-    margin-bottom: 2rem;
     background: rgba(245, 245, 245, 0.5);
     backdrop-filter: blur(3px);
     border-radius: 5px;
@@ -224,7 +242,7 @@ main {
 .product.collage {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+    gap: 4px;
     transition: all 0.5s ease-in-out;
 }
 
