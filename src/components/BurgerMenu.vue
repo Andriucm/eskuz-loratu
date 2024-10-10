@@ -66,12 +66,12 @@ const goToInstagram = () => {
             <div class="menu-container">
                 <SheetClose as-child v-if="isInstallable && !isIOS" @click="installPWA">
                     <div class="menu-item">
-                        <i class="fa-solid fa-circle-arrow-down"></i> {{$t('menu.installPWA')}}
+                        <i class="fa-solid fa-circle-arrow-down"></i> {{ $t('menu.installGuide')}}
                     </div>
                 </SheetClose>
                 <SheetClose as-child v-else-if="isIOS" @click="showGuide">
                     <div class="menu-item">
-                        <i class="fa-solid fa-circle-question"></i> {{ $t('menu.installGuide') }}
+                        <i class="fa-solid fa-circle-question"></i> {{ $t('menu.installPWA') }}
 
                     </div>
                 </SheetClose>
