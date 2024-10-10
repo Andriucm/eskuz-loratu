@@ -53,5 +53,11 @@
     },
     "overlay": {
         "welcome": "Ongi Etorri"
+    },
+    "categories": {
+        "earring": "Belarritakoa",
+        "ring": "Eraztuna",
+        "bracelet": "Pultsera",
+        "necklace": "Lepokoa"
     }
 }

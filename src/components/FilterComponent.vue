@@ -42,10 +42,10 @@ const maxPrice = ref(props.initialMaxPrice);
 const categoryFilter = ref(props.initialCategory);
 
 const categories = [
-    { id: 1, name: 'Pendiente' },
-    { id: 2, name: 'Anillo' },
-    { id: 3, name: 'Pulsera' },
-    { id: 4, name: 'Collar' }
+    { id: 1, name: $t('categories.earring') },
+    { id: 2, name: $t('categories.ring') },
+    { id: 3, name: $t('categories.bracelet') },
+    { id: 4, name: $t('categories.necklace') }
 ];
 
 // Emitir eventos al componente padre al cerrar el Sheet

@@ -53,5 +53,11 @@
     },
     "overlay": {
         "welcome": "Bienvenido"
+    },
+    "categories": {
+        "earring": "Pendiente",
+        "ring": "Anillo",
+        "bracelet": "Pulsera",
+        "necklace": "Collar"
     }
 }
