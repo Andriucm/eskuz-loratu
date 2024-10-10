@@ -180,7 +180,7 @@ a {
 
 button.button-primary:hover,
 a:hover {
-    background-color: var(--color-oro-metalico);
+    background-color: var(--color-turquesa);
 }
 
 /* Mensajes */

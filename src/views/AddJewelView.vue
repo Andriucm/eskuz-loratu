@@ -276,7 +276,7 @@ button.button-primary:disabled {
 }
 
 button.button-primary:hover:not(:disabled) {
-    background-color: var(--color-oro-metalico);
+    background-color: var(--color-turquesa);
 }
 
 /* Mensajes */

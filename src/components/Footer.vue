@@ -9,7 +9,7 @@ const currentYear = new Date().getFullYear();
                 <p>&copy; {{ currentYear }} Eskuz Loratu</p>
             </div>
             <div class="footer-center">
-                <p>Eskerrik asko gure orria bisitatzeagatik!</p>
+                <p>{{ $t('footer.thanks') }}</p>
             </div>
             <div class="footer-right">
                 <a href="https://www.instagram.com/eskuz_loratu/" target="_blank" aria-label="Instagram">

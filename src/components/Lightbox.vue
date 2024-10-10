@@ -80,6 +80,6 @@ onBeforeUnmount(() => {
 }
 
 .close:hover {
-    color: var(--color-oro-metalico);
+    color: var(--color-turquesa);
 }
 </style>

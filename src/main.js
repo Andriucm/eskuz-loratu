@@ -14,7 +14,9 @@ import Lightbox from "@/components/Lightbox.vue";
 
 //Firebase
 import { VueFire, VueFireAuth } from "vuefire";
-import { firebaseApp } from "@/config/firebase.js";
+import { firebaseApp } from "@/config/firebase.js"; 
+
+import i18n from "./i18n"; 
 
 
 const app = createApp(App);
@@ -27,6 +29,7 @@ app.use(VueFire, {
 app.use(createPinia());
 
 app.use(router);
+app.use(i18n);
 
 app.component("Lightbox", Lightbox);
 

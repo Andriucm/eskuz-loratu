@@ -1,0 +1,57 @@
+{
+    "productHeader": {
+        "title": "¡Joyas hechas a mano!",
+        "description": "La marca Eskuz Loratu combina el trabajo artesanal con la inspiración de la naturaleza. Convertimos la belleza de las flores y el encanto de la artesanía en piezas únicas que reflejan tu esencia. Cada joya hecha a mano se crea con amor y dedicación, transmitiendo emociones y celebrando la belleza universal.",
+        "button": "¡Ver imágenes!",
+        "notFound": "No se encontraron joyas :("
+    },
+    "filterComponent": {
+        "title": "Filtros",
+        "orderByLabel": "Ordenar por:",
+        "priceAsc": "Precio Ascendente",
+        "priceDesc": "Precio Descendente",
+        "dateAsc": "Fecha de Creación Ascendente",
+        "dateDesc": "Fecha de Creación Descendente",
+        "category": "Categoría",
+        "minPrice": "Precio Mínimo:",
+        "maxPrice": "Precio Máximo:",
+        "applyFilters": "Aplicar Filtros",
+        "resetFilters": "Reiniciar Filtros"
+    },
+    "menu": {
+        "home": "Inicio",
+        "addJewel": "Añadir Joya",
+        "login": "Iniciar Sesión",
+        "installPWA": "¿Cómo instalar?",
+        "installGuide": "Instalar aplicación",
+        "instagram": "Nuestras Redes",
+        "logout": "Cerrar Sesión"
+    },
+    "faqButton": {
+        "tooltipTitle": "Instala nuestra App",
+        "tooltipDescription": "Accede a nuestra Galeria Digital con nuestra App, directamente desde tu dispositivo.",
+        "installAppButton": "Instalar App",
+        "howToButton": "Cómo hacerlo"
+    },
+    "footer": {
+        "thanks": "¡Gracias por visitar nuestra página!"
+    },
+    "guide": {
+        "title": "Cómo agregar la App en iOS",
+        "description": "Sigue estos sencillos pasos para agregar la aplicación a tu pantalla de inicio en iOS:",
+        "steps": {
+            "step1": "Abre Safari y visita esta página.",
+            "step2": "Toca el ícono de compartir en la parte inferior de la pantalla.",
+            "step3": "Selecciona \"Agregar a la pantalla de inicio\".",
+            "step4": "Confirma el nombre y toca \"Agregar\"."
+        }
+    },
+    "productCard": {
+        "seeImage": "Ver Imagen",
+        "goToImage": "Ir a la Imagen",
+        "close": "Cerrar"
+    },
+    "overlay": {
+        "welcome": "Bienvenido"
+    }
+}

@@ -11,7 +11,7 @@
                     @ESKUZ_LORATU
                 </a>
             </h2>
-            <h2>Ongi Etorri</h2>
+            <h2>{{$t('overlay.welcome')}}</h2>
         </div>
     </div>
 </template>

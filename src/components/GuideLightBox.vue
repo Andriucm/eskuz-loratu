@@ -28,26 +28,26 @@ onBeforeUnmount(() => {
     <div v-if="guideStore.showGuide" class="lightbox" @click.self="closeLightbox">
         <span class="close" @click="closeLightbox">&times;</span>
         <div class="lightbox-content animate__animated animate__fadeInDown">
-            <h3 class="guide-title">Cómo agregar la PWA en iOS</h3>
+            <h3 class="guide-title">{{ $t('guide.title') }}</h3>
             <p class="guide-description">
-                Sigue estos sencillos pasos para agregar la aplicación a tu pantalla de inicio en iOS:
+                {{ $t('guide.description') }}
             </p>
             <ol class="guide-steps">
                 <li class="guide-step">
                     <span class="step-number">1</span>
-                    <p>Abre Safari y visita esta página.</p>
+                    <p>{{ $t('guide.steps.step1') }}</p>
                 </li>
                 <li class="guide-step">
                     <span class="step-number">2</span>
-                    <p>Toca el ícono de <i class="fa-solid fa-share-nodes"></i> en la parte inferior de la pantalla.</p>
+                    <p>{{ $t('guide.steps.step2') }}</p>
                 </li>
                 <li class="guide-step">
                     <span class="step-number">3</span>
-                    <p>Selecciona <strong>"Agregar a la pantalla de inicio"</strong>.</p>
+                    <p>{{ $t('guide.steps.step3') }}</p>
                 </li>
                 <li class="guide-step">
                     <span class="step-number">4</span>
-                    <p>Confirma el nombre y toca <strong>"Agregar"</strong>.</p>
+                    <p>{{ $t('guide.steps.step4') }}</p>
                 </li>
             </ol>
         </div>
@@ -57,7 +57,7 @@ onBeforeUnmount(() => {
 <style scoped>
 .lightbox {
     position: fixed;
-    z-index: 999999;
+    z-index: 9999999999999;
     left: 0;
     top: 0;
     width: 100%;
@@ -67,6 +67,7 @@ onBeforeUnmount(() => {
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 .lightbox-content {

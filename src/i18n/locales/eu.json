@@ -1,0 +1,57 @@
+{
+    "productHeader": {
+        "title": "¡Eskuz egindako bitxiak!",
+        "description": "Eskuz Loratu bitxi marka artisau-lana eta naturaren inspirazioa uztartzen ditu. Loreen edertasuna eta artisautzaren xarma pieza bakar bihurtzen ditugu, zure esentzia islatzeko. Eskuz egindako bitxi bakoitza maitasunez eta dedikazioz sortzen dugu, emozioak transmitituz eta edertasun unibertsala ospatuz.",
+        "button": "¡Irudiak!",
+        "notFound": "Bitxiak ez dira topatu :("
+    },
+    "filterComponent": {
+        "title": "Iragazkiak",
+        "orderByLabel": "Ordenatu honen arabera:",
+        "priceAsc": "Prezio Goranzkoa",
+        "priceDesc": "Prezio Beheranzkoa",
+        "dateAsc": "Sortze Data Goranzkoa",
+        "dateDesc": "Sortze Data Beheranzkoa",
+        "category": "Kategoria",
+        "minPrice": "Gutxieneko Prezioa:",
+        "maxPrice": "Gehieneko Prezioa:",
+        "applyFilters": "Iragazkiak Aplikatu",
+        "resetFilters": "Iragazkiak Berrezarri"
+    },
+    "menu": {
+        "home": "Hasiera",
+        "addJewel": "Bitxiak Gehitu",
+        "login": "Saioa Hasi",
+        "installPWA": "Nola instalatu?",
+        "installGuide": "Aplikazioa Instalatu",
+        "instagram": "Gure Sareak",
+        "logout": "Saioa Itxi"
+    },
+    "faqButton": {
+        "tooltipTitle": "Gure App-a instalatu",
+        "tooltipDescription": "Sartu gure Galeria Digitalera gure App-arekin, zuzenean zure gailutik.",
+        "installAppButton": "App-a Instalatu",
+        "howToButton": "Nola egin"
+    },
+    "footer": {
+        "thanks": "Eskerrik asko gure orria bisitatzeagatik!"
+    },
+    "guide": {
+        "title": "Nola gehitu App-a iOS-en",
+        "description": "Jarraitu urrats hauek aplikazioa zure hasierako pantailan gehitzeko iOS-en:",
+        "steps": {
+            "step1": "Ireki Safari eta bisitatu orrialde hau.",
+            "step2": "Egin klik partekatzeko ikonoan pantailaren behealdean.",
+            "step3": "\"Hasierako pantailan gehitu\" aukeratu.",
+            "step4": "Berretsi izena eta sakatu \"Gehitu\"."
+        }
+    },
+    "productCard": {
+        "seeImage": "Irudia Ikusi",
+        "goToImage": "Irudira eraman",
+        "close": "Sarratu"
+    },
+    "overlay": {
+        "welcome": "Ongi Etorri"
+    }
+}

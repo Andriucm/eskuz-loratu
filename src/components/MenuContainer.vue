@@ -53,13 +53,13 @@ const changeView = (view) => {
 }
 
 .item.active {
-    background-color: #007bff;
+    background-color: var(--color-turquesa);
     color: white;
     transform: translateY(-2px);
 }
 
 .item:hover {
-    background-color: #007bff;
+    background-color: var(--color-turquesa);
     color: white;
     transform: translateY(-2px);
 }

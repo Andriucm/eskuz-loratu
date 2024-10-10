@@ -7,7 +7,7 @@
     height: 48px;
     border-radius: 50%;
     display: inline-block;
-    border-top: 4px solid var(--color-oro-metalico);
+    border-top: 4px solid var(--color-turquesa);
     border-right: 4px solid transparent;
     box-sizing: border-box;
     animation: rotation 1s linear infinite;

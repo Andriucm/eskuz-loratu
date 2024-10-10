@@ -71,22 +71,22 @@ const resetFilters = () => {
         <!-- Contenido del Sheet -->
         <SheetContent side="right" class="w-full">
             <SheetHeader>
-                <SheetTitle class="text-3xl">Filtros</SheetTitle>
+                <SheetTitle class="text-3xl">{{ $t('filterComponent.title') }}</SheetTitle>
             </SheetHeader>
 
             <!-- Opciones de filtrado -->
             <div class="filter-group">
-                <label for="order-by">Ordenar por:</label>
+                <label for="order-by">{{ $t('filterComponent.orderByLabel') }}</label>
                 <select id="order-by" v-model="selectedOrder">
-                    <option value="price-asc">Precio Ascendente</option>
-                    <option value="price-desc">Precio Descendente</option>
-                    <option value="date-asc">Fecha de Creación Ascendente</option>
-                    <option value="date-desc">Fecha de Creación Descendente</option>
+                    <option value="price-asc">{{ $t('filterComponent.priceAsc') }}</option>
+                    <option value="price-desc">{{ $t('filterComponent.priceDesc') }}</option>
+                    <option value="date-asc">{{ $t('filterComponent.dateAsc') }}</option>
+                    <option value="date-desc">{{ $t('filterComponent.dateDesc') }}</option>
                 </select>
             </div>
 
             <div class="filter-group">
-                <label for="category">Categoría:</label>
+                <label for="category">{{ $t('filterComponent.category') }}:</label>
                 <select id="category" v-model="categoryFilter" multiple>
                     <option v-for="category in categories" :key="category.id" :value="category.id">
                         {{ category.name }}
@@ -98,22 +98,20 @@ const resetFilters = () => {
 
             <!-- Rango de precios -->
             <div class="filter-group">
-                <label for="min-price">Precio Mínimo:</label>
+                <label for="min-price">{{ $t('filterComponent.minPrice') }}</label>
                 <input type="number" id="min-price" v-model="minPrice" placeholder="0" />
             </div>
 
             <div class="filter-group">
-                <label for="max-price">Precio Máximo:</label>
+                <label for="max-price">{{ $t('filterComponent.maxPrice') }}</label>
                 <input type="number" id="max-price" v-model="maxPrice" placeholder="1000" />
             </div>
 
-            <!-- Botón de aplicación de filtros -->
             <SheetFooter class="flex mt-4">
-                <!-- Al hacer clic en "Cerrar" se aplican los filtros -->
                 <SheetClose as-child>
                     <div class="button-group">
                         <button class="button-primary apply" @click="applyFilters">
-                            Aplicar Filtros
+                            {{ $t('filterComponent.applyFilters') }}
                         </button>
                         <button class="button-primary reset" @click="resetFilters">
                             <i class="fa-solid fa-rotate-left"></i>
@@ -147,7 +145,7 @@ const resetFilters = () => {
     flex-grow: 3;
 }
 .apply:active {
-    background-color: var(--color-oro-metalico);
+    background-color: var(--color-turquesa);
 }
 
 .reset {

@@ -26,7 +26,7 @@ const visible = ref(false);
 const selectedImage = ref('');
 const viewMode = ref('image');
 const sortOrder = ref('price-asc');
-const filteredProducts = ref([]); 
+const filteredProducts = ref([]);
 const categoryFilter = ref([])
 const minPrice = ref(0);
 const maxPrice = ref(15);
@@ -58,7 +58,7 @@ const filterAndSortProducts = () => {
         if (sortOrder.value === 'date-desc') return new Date(b.createdAt) - new Date(a.createdAt);
     });
 
-    filteredProducts.value = filtered; 
+    filteredProducts.value = filtered;
 };
 
 // Funciones para manejar los eventos emitidos por FilterComponent
@@ -75,7 +75,7 @@ const handleCategoryFilter = (category) => {
     categoryFilter.value = category;
 }
 
-const resetFilters = () => { 
+const resetFilters = () => {
     minPrice.value = 0;
     maxPrice.value = 15;
     categoryFilter.value = [];
@@ -116,15 +116,13 @@ const changeView = (view) => {
         <FAQButton />
         <div class="product-header">
             <div class="container">
-                <h3>¡Eskuz egindako bitxiak!</h3>
-                <span>"Eskuz Loratu bitxi marka artisau-lana eta naturaren inspirazioa uztartzen ditu. Loreen edertasuna
-                    eta artisautzaren xarma pieza bakar bihurtzen ditugu, zure esentzia islatzeko. Eskuz egindako bitxi
-                    bakoitza maitasunez eta dedikazioz sortzen dugu, emozioak transmitituz eta edertasun unibertsala
-                    ospatuz."
+                <h3>{{ $t('productHeader.title') }}</h3>
+                <span>
+                    {{ $t('productHeader.description') }}
                 </span>
             </div>
             <Carousel v-if="products.length" :products="products"></Carousel>
-            <button class="button-primary" @click="scrollToProducts">¡Irudiak!</button>
+            <button class="button-primary" @click="scrollToProducts"> {{ $t('productHeader.button') }}</button>
         </div>
         <Loader v-if="loading" />
 
@@ -134,8 +132,9 @@ const changeView = (view) => {
                 <div class="container tool-menu-container">
                     <MenuContainer @changeView="changeView" :viewMode="viewMode" />
                     <Separator orientation="vertical" class="h-full border-l border-gray-300 mx-4" />
-                    <FilterComponent @order-change="handleOrderChange" @price-filter="handlePriceFilter" @category-filter="handleCategoryFilter" @reset-filters="resetFilters"
-                        :initialOrder="sortOrder" :initialMinPrice="minPrice" :initialMaxPrice="maxPrice" :initialCategory="categoryFilter" />
+                    <FilterComponent @order-change="handleOrderChange" @price-filter="handlePriceFilter"
+                        @category-filter="handleCategoryFilter" @reset-filters="resetFilters" :initialOrder="sortOrder"
+                        :initialMinPrice="minPrice" :initialMaxPrice="maxPrice" :initialCategory="categoryFilter" />
                 </div>
             </div>
 
@@ -145,10 +144,10 @@ const changeView = (view) => {
                     :product="product" @open-lightbox="openLightbox" :viewMode="viewMode" />
                 <CarouselView v-else :products="filteredProducts" @open-lightbox="openLightbox" />
             </div>
-            <p v-else>Bitxiak ez dira topatu :( </p>
+            <p v-else>{{ $t('productHeader.notFound') }} </p>
         </div>
 
-        <p v-else>Bitxiak ez dira topatu :( </p>
+        <p v-else>{{ $t('productHeader.notFound') }} </p>
         <Lightbox :image="selectedImage" :visible="visible" @close="closeLightbox" />
         <GuideLightBox />
     </main>
@@ -178,6 +177,7 @@ main {
     background-image: url("../assets/svg/main-background.svg");
     background-position: center;
 }
+
 .product-header::before {
     content: "";
     position: absolute;
@@ -185,7 +185,7 @@ main {
     left: 0;
     width: 100%;
     height: 100%;
-        background: rgba(245, 245, 245, 0.3);
+    background: rgba(245, 245, 245, 0.3);
     z-index: 1;
     pointer-events: none;
 }
@@ -215,6 +215,7 @@ main {
     position: relative;
     width: 100%;
     min-height: 100vh;
+    background-color: var(--color-fondo);
 }
 
 /* Contenedor para SearchBar y MenuContainer */
@@ -248,7 +249,7 @@ main {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding:  0;
+    padding: 0;
     transition: all 0.5s ease-in-out;
 }
 

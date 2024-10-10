@@ -64,12 +64,12 @@ const redirectTo = (link: string) => {
                 <div class="grid gap-4 py-4">
                     <div @click="openLightbox(product.image)"
                         class="toolbar-option flex justify-between items-center p-2 bg-[var(--color-blanco)] text-[var(--color-texto)] border-b border-[var(--color-gris-claro)] cursor-pointer transition-colors duration-300 hover:bg-[var(--color-gris-claro)]">
-                        <span>Irudia Ikusi</span>
+                        <span>{{$t('productCard.seeImage')}}</span>
                         <i class="fa-solid fa-maximize"></i>
                     </div>
                     <div @click="redirectTo(product.link)"
                         class="toolbar-option flex justify-between items-center p-2 bg-[var(--color-blanco)] text-[var(--color-texto)] border-b border-[var(--color-gris-claro)] cursor-pointer transition-colors duration-300 hover:bg-[var(--color-gris-claro)]">
-                        <span>Irudira eraman</span>
+                        <span>{{ $t('productCard.goToImage') }}</span>
                         <i class="fa-solid fa-arrow-up-right-from-square"></i>
                     </div>
                 </div>
@@ -79,7 +79,7 @@ const redirectTo = (link: string) => {
             <SheetFooter class="flex mt-4">
                 <SheetClose as-child>
                     <button class="button-primary">
-                        Sarratu
+                        {{ $t('productCard.close') }}
                     </button>
                 </SheetClose>
             </SheetFooter>

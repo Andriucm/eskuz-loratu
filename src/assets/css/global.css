@@ -3,14 +3,14 @@
 
 :root {
 	/* Colores */
-	--color-turquesa: rgb(64, 224, 208);
-	--color-actions: #e4405f;
+	--color-turquesa: hsla(204, 56%, 31%, 1);
+	--color-actions: hsla(181, 49%, 43%, 1);
 	--color-fondo: rgb(232, 248, 246);
 	--color-blanco: rgb(255, 255, 255);
 	--color-gris-oscuro: rgb(51, 51, 51);
 	--color-gris-claro: rgb(245, 245, 245);
-	--color-oro-metalico: rgb(212, 175, 55);
 	--color-gris-medio: rgb(102, 102, 102);
+    /* CSS HSL */
 
 	/* Tipografía */
 	--font-family-primary: "Poppins", sans-serif;
@@ -77,7 +77,7 @@ a {
 }
 
 a:hover {
-	color: var(--color-oro-metalico);
+	color: var(--color-turquesa);
 	transition: color 0.3s ease-in-out;
 }
 
@@ -105,7 +105,7 @@ button {
 }
 
 .button-primary:hover {
-	background-color: var(--color-oro-metalico);
+	background-color: var(--color-turquesa);
 }
 
 /* Botones secundarios */
@@ -123,8 +123,8 @@ button {
 }
 
 .button-secondary:hover {
-	color: var(--color-oro-metalico);
-	border-color: var(--color-oro-metalico);
+	color: var(--color-turquesa);
+	border-color: var(--color-turquesa);
 }
 
 /* Listas */

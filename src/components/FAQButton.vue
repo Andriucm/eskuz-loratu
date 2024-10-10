@@ -33,12 +33,12 @@ onMounted(() => {
     <button @click="toggleFaq" class="faq-button" :class="{ 'faq-button-selected': faqSelected }">
         <i class="fa-solid fa-question"></i>
         <div class="tooltip" :class="{ 'faq-button-selected-tooltip': faqSelected }">
-            <h3>Instala nuestra App</h3>
+            <h3>{{ $t('faqButton.tooltipTitle') }}</h3>
             <p class="tooltip-description">
-                Accede a nuestra Galeria Digital con nuestra App, directamente desde tu dispositivo.
+                {{ $t('faqButton.tooltipDescription') }}
             </p>
-            <button v-if="isInstallable && !isIOS" @click="installPWA" class="button-primary">Instalar App</button>
-            <button v-else-if="isIOS" @click="showGuide" class="button-primary">Como hacerlo</button>
+            <button v-if="isInstallable && !isIOS" @click="installPWA" class="button-primary">{{ $t('faqButton.installAppButton') }}</button>
+            <button v-else-if="isIOS" @click="showGuide" class="button-primary">{{ $t('faqButton.howToButton') }}</button>
         </div>
     </button>
 </template>
@@ -49,7 +49,6 @@ onMounted(() => {
     height: 4rem;
     border-radius: 50%;
     border: none;
-    background-color: var(--color-turquesa);
     background-image: linear-gradient(147deg, var(--color-blanco) 0%, var(--color-fondo) 74%);
     display: flex;
     align-items: center;
