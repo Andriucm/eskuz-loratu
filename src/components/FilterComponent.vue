@@ -11,6 +11,10 @@ import {
     SheetTrigger,
 } from '@/components/ui/sheet';
 import { Separator } from '@/components/ui/separator';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+
 
 // Props para valores iniciales (opcionales)
 const props = defineProps({
@@ -41,11 +45,13 @@ const minPrice = ref(props.initialMinPrice);
 const maxPrice = ref(props.initialMaxPrice);
 const categoryFilter = ref(props.initialCategory);
 
+
+// Definir las categorías usando la función `t` para las traducciones
 const categories = [
-    { id: 1, name: $t('categories.earring') },
-    { id: 2, name: $t('categories.ring') },
-    { id: 3, name: $t('categories.bracelet') },
-    { id: 4, name: $t('categories.necklace') }
+    { id: 1, name: t('categories.earring') },
+    { id: 2, name: t('categories.ring') },
+    { id: 3, name: t('categories.bracelet') },
+    { id: 4, name: t('categories.necklace') }
 ];
 
 // Emitir eventos al componente padre al cerrar el Sheet
