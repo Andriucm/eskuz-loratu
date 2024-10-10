@@ -1,8 +1,7 @@
 <script setup>
-import { inject } from 'vue';
+import { inject, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
-
-
 import { useGuideStore } from '@/stores/guide';
 import {
     Sheet,
@@ -13,6 +12,16 @@ import {
     SheetTrigger,
 } from '@/components/ui/sheet'
 
+
+const { locale } = useI18n();
+const savedLocale = localStorage.getItem('app-locale');
+if (savedLocale) {
+    locale.value = savedLocale;
+}
+// Guardar el idioma en localStorage cada vez que se cambie el valor de `locale`
+watch(locale, (newLocale) => {
+    localStorage.setItem('app-locale', newLocale);
+})
 const guideStore = useGuideStore();
 const showGuide = () => {
     guideStore.toggleGuide();
@@ -82,10 +91,12 @@ const goToInstagram = () => {
                     </div>
                 </SheetClose>
 
-                <div class="menu-item" >
-                   <select name="lang" id="lang" v-model="$i18n.locale">
-                    <option v-for="locale in $i18n.availableLocales" :key="locale" :value="locale">{{locale}}</option>
-                   </select>
+                <div class="menu-item">
+                    <select name="lang" id="lang" v-model="locale">
+                        <option v-for="locale in $i18n.availableLocales" :key="locale" :value="locale">
+                            {{ locale }}
+                        </option>
+                    </select>
                 </div>
             </div>
 
