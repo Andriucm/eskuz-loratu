@@ -102,6 +102,7 @@ const redirectTo = (link: string) => {
     overflow: visible;
     cursor: pointer;
     /* Añadir cursor de pointer para indicar interactividad */
+    margin-bottom: 1.5rem;
 }
 
 .product-card:hover {
@@ -114,7 +115,6 @@ const redirectTo = (link: string) => {
     aspect-ratio: 4 / 5;
     object-fit: cover;
     height: auto;
-    margin-bottom: 15px;
     border-radius: 5px;
     transition: transform 0.3s ease;
 }
