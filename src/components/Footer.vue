@@ -5,9 +5,6 @@ const currentYear = new Date().getFullYear();
 <template>
     <footer class="footer">
         <div class="footer-content">
-            <div class="footer-left">
-                <p>&copy; {{ currentYear }} Eskuz Loratu</p>
-            </div>
             <div class="footer-center">
                 <p>{{ $t('footer.thanks') }}</p>
             </div>
@@ -15,6 +12,9 @@ const currentYear = new Date().getFullYear();
                 <a href="https://www.instagram.com/eskuz_loratu/" target="_blank" aria-label="Instagram">
                     @eskuz_loratu
                 </a>
+            </div>
+            <div class="footer-left">
+                <p>&copy; {{ currentYear }} Eskuz Loratu</p>
             </div>
         </div>
     </footer>
