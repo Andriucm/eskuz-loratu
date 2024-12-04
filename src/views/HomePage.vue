@@ -114,8 +114,8 @@ const changeView = (view) => {
 <template>
     <main>
         <FAQButton />
-        <div class="product-header">
-            <div class="container">
+        <div class="product-header container">
+            <div>
                 <h3>{{ $t('productHeader.title') }}</h3>
                 <span>
                     {{ $t('productHeader.description') }}
