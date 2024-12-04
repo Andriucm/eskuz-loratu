@@ -37,9 +37,8 @@ const authStore = useAuthStore();
 const router = useRouter();
 
 const goToAddJewel = () => {
-    if (authStore.isLoggedIn) {
-        router.push({ name: 'addJewel' });
-    }
+    authStore.isLoggedIn ? router.push({ name: 'addJewel' }) : router.push({ name: 'login' })
+    
 };
 const goToInstagram = () => {
     window.open('https://www.instagram.com/eskuz_loratu/', '_blank');
