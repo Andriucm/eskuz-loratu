@@ -91,7 +91,7 @@ const redirectTo = (link: string) => {
 .product-card {
     background-color: var(--color-secundario);
     border: 1px solid var(--color-borde);
-    box-shadow: 0 2px 8px var(--color-sombra);
+    box-shadow: 0px 2px 8px 0px #00000063;
     display: flex;
     flex-direction: column;
     text-align: left;
@@ -115,12 +115,14 @@ const redirectTo = (link: string) => {
     aspect-ratio: 4 / 5;
     object-fit: cover;
     height: auto;
-    border-radius: 5px;
+    border-radius: 5px 5px 0 0;
     transition: transform 0.3s ease;
 }
 
 .product-info {
     padding: 0 1rem;
+    background-color: var(--color-blanco);
+    border-radius: 0 0 5px 5px;
 }
 
 .product-info h2 {

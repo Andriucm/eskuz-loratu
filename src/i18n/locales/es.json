@@ -3,7 +3,8 @@
         "title": "¡Joyas hechas a mano!",
         "description": "La marca Eskuz Loratu combina el trabajo artesanal con la inspiración de la naturaleza. Convertimos la belleza de las flores y el encanto de la artesanía en piezas únicas que reflejan tu esencia. Cada joya hecha a mano se crea con amor y dedicación, transmitiendo emociones y celebrando la belleza universal.",
         "button": "¡Ver imágenes!",
-        "notFound": "No se encontraron joyas :("
+        "notFound": "No se encontraron joyas :(",
+        "noMoreProducts": "No se encontraron mas productos :)"
     },
     "filterComponent": {
         "title": "Filtros",

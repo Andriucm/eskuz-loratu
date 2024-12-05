@@ -1,12 +1,15 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 import { useFirestore } from "vuefire";
-import { collection, query, getDocs, addDoc } from "firebase/firestore";
+import { collection, query, getDocs, addDoc, limit, orderBy, startAfter } from "firebase/firestore";
 
 export const useProductsStore = defineStore("products", () => {
 	const db = useFirestore();
 	const products = ref([]);
 	const loading = ref(false);
+
+	const lastVisible = ref(null);
+	const hasMore = ref(true);
 
 	async function createProduct(product) {
 		await addDoc(collection(db, "products"), product);
@@ -14,17 +17,47 @@ export const useProductsStore = defineStore("products", () => {
 
 	// Método para obtener productos
 	const getProducts = async () => {
-		loading.value = true; // Iniciar estado de carga
+		if (loading.value || !hasMore.value) return;
+
+		loading.value = true;
 		try {
-			const querySnapshot = await getDocs(query(collection(db, "products")));
-			products.value = querySnapshot.docs.map((doc) => ({
-				id: doc.id,
-				...doc.data(),
-			}));
+			let productQuery;
+			if (lastVisible.value) {
+				productQuery = query(
+					collection(db, "products"),
+					orderBy("createdAt", "asc"), 
+					startAfter(lastVisible.value),
+					limit(9)
+				);
+			} else {
+				productQuery = query(
+					collection(db, "products"),
+					orderBy("createdAt", "asc"), 
+					limit(9)
+				);
+			}
+
+			const snapshot = await getDocs(productQuery);
+
+			if (!snapshot.empty) {
+				const newProducts = snapshot.docs.map((doc) => ({
+					id: doc.id,
+					...doc.data(),
+				}));
+
+				products.value = [...products.value, ...newProducts];
+				lastVisible.value = snapshot.docs[snapshot.docs.length - 1];
+
+				if (snapshot.docs.length < 9) {
+					hasMore.value = false;
+				}
+			} else {
+				hasMore.value = false;
+			}
 		} catch (error) {
 			console.error("Error al obtener productos:", error);
 		} finally {
-			loading.value = false; // Finalizar estado de carga
+			loading.value = false;
 		}
 	};
 
@@ -32,6 +65,7 @@ export const useProductsStore = defineStore("products", () => {
 		products,
 		loading,
 		getProducts,
-		createProduct,
+        createProduct,
+        hasMore
 	};
 });

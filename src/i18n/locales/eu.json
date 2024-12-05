@@ -3,7 +3,8 @@
         "title": "¡Eskuz egindako bitxiak!",
         "description": "Eskuz Loratu bitxi marka artisau-lana eta naturaren inspirazioa uztartzen ditu. Loreen edertasuna eta artisautzaren xarma pieza bakar bihurtzen ditugu, zure esentzia islatzeko. Eskuz egindako bitxi bakoitza maitasunez eta dedikazioz sortzen dugu, emozioak transmitituz eta edertasun unibertsala ospatuz.",
         "button": "¡Irudiak!",
-        "notFound": "Bitxiak ez dira topatu :("
+        "notFound": "Bitxiak ez dira topatu :(",
+        "noMoreProducts": "Produktu gehiago ez dira aurkitu :)"
     },
     "filterComponent": {
         "title": "Iragazkiak",

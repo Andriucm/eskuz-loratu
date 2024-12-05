@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, computed, watch, nextTick } from "vue";
+import { ref, onMounted, onUnmounted, computed, watch, nextTick } from "vue";
 import { useProductsStore } from "@/stores/products";
 import Loader from "@/components/Loader.vue";
 import Carousel from "@/components/Carousel.vue";
@@ -10,15 +10,23 @@ import MenuContainer from "@/components/MenuContainer.vue";
 import FilterComponent from "@/components/FilterComponent.vue";
 import CarouselView from "@/components/CarouselView.vue";
 import { Separator } from '@/components/ui/separator'
+import { debounce } from "lodash";
 
 
 const productStore = useProductsStore();
 
-// Obtener los productos al montar el componente
 onMounted(() => {
+    // Escucha el evento de scroll en window
+    window.addEventListener("scroll", handleScroll);
+
+    // Carga inicial de productos
     productStore.getProducts();
 });
 
+onUnmounted(() => {
+    // Limpia el evento al desmontar el componente
+    window.removeEventListener("scroll", handleScroll);
+});
 // Variables reactivas y computadas
 const products = computed(() => productStore.products);
 const loading = computed(() => productStore.loading);
@@ -60,6 +68,15 @@ const filterAndSortProducts = () => {
 
     filteredProducts.value = filtered;
 };
+
+const handleScroll = debounce(() => {
+    const scrollTop = window.scrollY || window.pageYOffset;
+    const clientHeight = window.innerHeight;
+    const scrollHeight = document.documentElement.scrollHeight;
+    if (scrollTop + clientHeight >= scrollHeight - 100 && !loading.value && productStore.hasMore) {
+        productStore.getProducts(); // Cargar más productos
+    }
+}, 200);
 
 // Funciones para manejar los eventos emitidos por FilterComponent
 const handleOrderChange = (order) => {
@@ -124,7 +141,7 @@ const changeView = (view) => {
             <Carousel v-if="products.length" :products="products"></Carousel>
             <button class="button-primary" @click="scrollToProducts"> {{ $t('productHeader.button') }}</button>
         </div>
-        <Loader v-if="loading" />
+        <Loader v-if="loading && products.length === 0" />
 
         <!-- Contenedor para SearchBar y MenuContainer -->
         <div v-else-if="products.length" class="product-container" id="product-container">
@@ -145,6 +162,11 @@ const changeView = (view) => {
                 <CarouselView v-else :products="filteredProducts" @open-lightbox="openLightbox" />
             </div>
             <p v-else>{{ $t('productHeader.notFound') }} </p>
+            <div v-if="loading && products.length > 0" class="loading-container">
+                <Loader  />
+            </div>
+            <p v-if="!loading && !productStore.hasMore">{{ $t('productHeader.noMoreProducts') }}</p>
+
         </div>
 
         <p v-else>{{ $t('productHeader.notFound') }} </p>
@@ -257,5 +279,11 @@ p {
     text-align: center;
     color: var(--color-texto-secundario);
     font-size: 1.2em;
+}
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
 }
 </style>
