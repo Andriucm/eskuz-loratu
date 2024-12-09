@@ -25,14 +25,14 @@ export const useProductsStore = defineStore("products", () => {
 			if (lastVisible.value) {
 				productQuery = query(
 					collection(db, "products"),
-					orderBy("createdAt", "desc"), 
+					orderBy("createdAt"), 
 					startAfter(lastVisible.value),
 					limit(9)
 				);
 			} else {
 				productQuery = query(
 					collection(db, "products"),
-					orderBy("createdAt", "desc"), 
+					orderBy("createdAt"), 
 					limit(9)
 				);
 			}
