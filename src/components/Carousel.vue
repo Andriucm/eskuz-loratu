@@ -61,7 +61,7 @@ const closeLightbox = () => {
                         <Card>
                             <CardContent @click="openLightbox(product.image)"
                                 class="flex aspect-[4/5] items-center justify-center p-2 rounded-[5px]">
-                                <img class="aspect-[4/5] rounded-[5px]" :src="product.image"
+                                <img loading="lazy" class="aspect-[4/5] rounded-[5px]" :src="product.image"
                                     :alt="`Imagen de ${product.name}`">
                             </CardContent>
                         </Card>

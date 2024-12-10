@@ -41,7 +41,7 @@ const redirectTo = (link: string) => {
     <Sheet>
         <SheetTrigger as-child>
             <div class="product-card ">
-                <img :src="product.image" :alt="product.name" class="product-image "
+                <img loading="lazy" :src="product.image" :alt="product.name" class="product-image "
                     :class="{ 'collage-view': viewMode === 'collage' }" />
                 <div class="product-info ">
                     <h2 :class="{ hidden: viewMode === 'collage'}">{{ product.name }}</h2>

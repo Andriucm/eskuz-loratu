@@ -71,8 +71,8 @@ watchOnce(emblaMainApi, (emblaMainApi) => {
                             <CardContent class="flex aspect-[4/5]  justify-center p-0 rounded-[5px]">
                                 <Sheet>
                                     <SheetTrigger as-child>
-                                        <img class="aspect-[4/5] rounded-[5px] object-cover" :src="product.image"
-                                            :alt="`Imagen de ${product.name}`">
+                                        <img loading="lazy" class="aspect-[4/5] rounded-[5px] object-cover"
+                                            :src="product.image" :alt="`Imagen de ${product.name}`">
                                     </SheetTrigger>
                                     <SheetContent side="bottom"
                                         class="sheet-content bg-[var(--color-blanco)] rounded-t-lg p-6">
@@ -124,7 +124,7 @@ watchOnce(emblaMainApi, (emblaMainApi) => {
                     <div class="p-1" :class="index === selectedIndex ? '' : 'opacity-50'">
                         <Card>
                             <CardContent class="flex aspect-[1/1] items-center justify-center p-1 rounded-[5px]">
-                                <img class="aspect-[1/1] rounded-[5px]" :src="product.image"
+                                <img loading="lazy" class="aspect-[1/1] rounded-[5px]" :src="product.image"
                                     :alt="`Imagen de ${product.name}`">
                             </CardContent>
                         </Card>
